@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+# SPDX-License-Identifier: Apache-2.0
+
 name: CI
 
 on:
@@ -31,13 +34,22 @@ jobs:
       - name: Check site
         run: node tools/check-site.mjs
 
-      # Unit tests with a coverage gate over the demo logic, then Chromium end-to-end tests against site/
-      # served with the production security headers (tests/serve.mjs reads them from deploy/Caddyfile).
+      # Every file carries SPDX copyright and licence information, in a header or in REUSE.toml.
+      - name: REUSE compliance
+        uses: fsfe/reuse-action@676e2d560c9a403aa252096d99fcab3e1132b0f5 # v6.0.0
+
       - name: Install test dependencies
         run: npm ci --no-audit --no-fund
+
+      # ESLint over site, tests and tools; a warning fails the job like an error.
+      - name: Lint
+        run: npm run lint
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      # Unit tests with a coverage gate over the demo logic, then Chromium end-to-end tests against site/
+      # served with the production security headers (tests/serve.mjs reads them from deploy/Caddyfile), then one
+      # combined coverage gate over every site/**/*.js file (unit + browser V8 coverage, merged by c8).
       - name: Test
         run: npm test

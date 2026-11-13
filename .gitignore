@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+# SPDX-License-Identifier: Apache-2.0
+
 .qa/
 node_modules/
 site/version.txt
@@ -5,3 +8,5 @@ site/version.txt
 Thumbs.db
 test-results/
 playwright-report/
+.coverage/
+coverage/

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+# SPDX-License-Identifier: Apache-2.0
 # Server side of a deploy. Installed as /opt/sanad-site/bin/receive (root-owned) and bound to the
 # CI deploy key with `restrict,command=...` in authorized_keys, so that key can do only this:
 #   deploy <sha>   read a .tar.gz on stdin (site/ + Caddyfile), publish it as releases/<sha>, switch

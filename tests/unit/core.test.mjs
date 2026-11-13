@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+// SPDX-License-Identifier: Apache-2.0
+
 // Unit tests for site/assets/js/sanad-core.js, the demo logic the browser runs. Node 24 ships WebCrypto with Ed25519.
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';

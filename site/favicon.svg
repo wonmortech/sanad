@@ -1,1 +1,3 @@
+<!-- SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><style>.r{stroke:#0f6e5c}.t{stroke:#0f6e5c}.b{fill:#f8f3e4}@media (prefers-color-scheme:dark){.r,.t{stroke:#5cc9ae}.b{fill:#0a1210}}</style><circle class="b" cx="16" cy="16" r="15.5"/><g fill="none" stroke-width="1.3"><circle class="r" cx="16" cy="16" r="14" stroke-dasharray="2.2 1.6"/><circle class="r" cx="16" cy="16" r="11"/></g><path class="t" d="M10.6 16.4l3.6 3.6 7.4-7.6" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>

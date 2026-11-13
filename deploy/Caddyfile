@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+# SPDX-License-Identifier: Apache-2.0
+
 {
 	# Admin API only inside the container: deploy/receive.sh reloads config through it.
 	admin localhost:2019

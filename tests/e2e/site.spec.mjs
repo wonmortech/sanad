@@ -1,5 +1,8 @@
+// SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+// SPDX-License-Identifier: Apache-2.0
+
 // Browser tests for the three home pages, the live demo, the theme, the language links and the 404 page.
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures.mjs';
 
 const PAGES = [
   { path: '/', lang: 'uz', name: 'Namuna Oʻquvchi' },
@@ -173,4 +176,129 @@ test('the test server never serves files outside site/', async ({ request }) => 
     expect(res.status(), path).toBe(404);
     expect(await res.text()).not.toContain('"devDependencies"');
   }
+});
+
+test('narrow screens: the menu opens, closes with Escape and closes when a section link is followed', async ({ page }) => {
+  const problems = watch(page);
+  await page.setViewportSize({ width: 390, height: 800 });
+  await page.goto('/en/');
+  const btn = page.locator('#menu'), nav = page.locator('#nav');
+  await expect(nav).toBeHidden();
+  await btn.click();
+  await expect(nav).toBeVisible();
+  await expect(btn).toHaveAttribute('aria-expanded', 'true');
+  await expect(btn).toHaveAttribute('aria-label', 'Close menu');
+  await page.keyboard.press('Escape');
+  await expect(nav).toBeHidden();
+  await expect(btn).toHaveAttribute('aria-expanded', 'false');
+  await expect(btn).toBeFocused();
+  await page.keyboard.press('Escape'); // closed already: nothing happens
+  await expect(btn).toHaveAttribute('aria-expanded', 'false');
+  await btn.click();
+  await nav.locator('a[href="#qanday"]').click();
+  await expect(nav).toBeHidden();
+  await expect(btn).toHaveAttribute('aria-label', 'Open menu');
+  await expect(page).toHaveURL(/#qanday$/);
+  expect(problems).toEqual([]);
+});
+
+test('with motion: the certificate tilts, the chain rail runs and the chat plays message by message', async ({ page }) => {
+  const problems = watch(page);
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/en/');
+  const wrap = page.locator('.cert-wrap');
+  await expect(wrap).toHaveAttribute('style', /rotateX\(/);
+  // the pointer pulls the tilt and the gloss towards it; leaving the stage lets them settle back to the centre
+  const stage = await page.locator('.stage').boundingBox();
+  const gx = () => page.locator('#cert').evaluate((c) => parseFloat(c.style.getPropertyValue('--gx')));
+  await page.mouse.move(stage.x + stage.width * .9, stage.y + stage.height * .1);
+  await expect.poll(gx).toBeGreaterThan(60);
+  await page.mouse.move(1, 1);
+  await expect.poll(gx).toBeLessThan(55);
+
+  // sections fade in as they scroll into view
+  const rv = page.locator('.rv').first();
+  await rv.scrollIntoViewIfNeeded();
+  await expect(rv).toHaveClass(/\bin\b/);
+
+  const rail = page.locator('svg.rail');
+  await rail.scrollIntoViewIfNeeded();
+  const traveller = rail.locator('.traveller');
+  await expect(traveller).toHaveAttribute('transform', /^translate\(/);
+  const first = await traveller.getAttribute('transform');
+  await expect.poll(() => traveller.getAttribute('transform')).not.toBe(first);
+
+  const chat = page.locator('#chat');
+  await chat.scrollIntoViewIfNeeded();
+  const msgs = chat.locator('.msg');
+  await expect(msgs.first()).toHaveClass(/\bin\b/);
+  // a typing indicator shows first, then gives way to the answer
+  await expect(chat.locator('.msg[data-typing]').first()).toHaveClass(/\bin\b/);
+  await expect(chat.locator('.msg[data-typing]').first()).toBeHidden({ timeout: 5_000 });
+  await expect(msgs.last()).toHaveClass(/\bin\b/, { timeout: 15_000 });
+  expect(problems).toEqual([]);
+});
+
+test('without motion nothing animates, and the animation starts when the visitor allows motion', async ({ page }) => {
+  const problems = watch(page);
+  await page.goto('/en/');
+  const wrap = page.locator('.cert-wrap');
+  await expect(page.locator('#cert')).toHaveAttribute('data-state', 'ok');
+  // chat: all answers shown at once, typing indicators removed
+  await expect(page.locator('#chat .msg[data-typing]')).toHaveCount(0);
+  await expect(page.locator('#chat .msg:not(.in)')).toHaveCount(0);
+  await expect(page.locator('svg.rail .traveller')).not.toHaveAttribute('transform', /./);
+  expect(await wrap.getAttribute('style')).toBeNull();
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(wrap).toHaveAttribute('style', /rotateX\(/);
+  expect(problems).toEqual([]);
+});
+
+test('the theme switch keeps working when storage is blocked', async ({ page }) => {
+  const problems = watch(page);
+  // private modes and strict settings can make localStorage throw: the theme must still switch, just not be saved
+  await page.addInitScript(() => {
+    Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('blocked', 'SecurityError'); } });
+  });
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.goto('/en/');
+  const html = page.locator('html'), btn = page.locator('#theme');
+  await expect(btn).toHaveAttribute('aria-label', 'Light theme');
+  await btn.click();
+  await expect(html).toHaveAttribute('data-theme', 'light');
+  await expect(btn).toHaveAttribute('aria-label', 'Dark theme');
+  await page.reload();
+  await expect(html).not.toHaveAttribute('data-theme', /./);
+  expect(problems).toEqual([]);
+});
+
+test('demo: says so when the browser has no WebCrypto', async ({ page }) => {
+  const problems = watch(page);
+  await page.addInitScript(() => { Object.defineProperty(Crypto.prototype, 'subtle', { get: () => undefined }); });
+  await page.goto('/en/');
+  await expect(page.locator('#verdict b')).toHaveText(/WebCrypto is not available/);
+  await expect(page.locator('#steps li')).toHaveCount(0);
+  expect(problems).toEqual([]);
+});
+
+test('demo: falls back to ECDSA P-256 where Ed25519 is missing, and reports a key failure instead of hanging', async ({ page }) => {
+  const problems = watch(page);
+  await page.addInitScript(() => {
+    const gen = SubtleCrypto.prototype.generateKey;
+    SubtleCrypto.prototype.generateKey = function (alg, ...rest) {
+      if (alg && alg.name === 'Ed25519') return Promise.reject(new DOMException('not supported', 'NotSupportedError'));
+      if (alg && alg.name === 'ECDSA' && sessionStorage.getItem('no-ecdsa')) return Promise.reject(new DOMException('not supported', 'NotSupportedError'));
+      return gen.call(this, alg, ...rest);
+    };
+  });
+  await page.goto('/en/');
+  await expect(page.locator('#verdict')).toHaveAttribute('data-v', 'ok');
+  await expect(page.locator('#meta')).toContainText('ECDSA P-256');
+  await page.locator('#t-hours').check({ force: true });
+  await expect(page.locator('#verdict')).toHaveAttribute('data-v', 'bad');
+
+  await page.evaluate(() => sessionStorage.setItem('no-ecdsa', '1'));
+  await page.reload();
+  await expect(page.locator('#verdict b')).toHaveText(/WebCrypto is not available/);
+  expect(problems).toEqual([]);
 });

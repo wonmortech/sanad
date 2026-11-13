@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+// SPDX-License-Identifier: Apache-2.0
+
 // Checks site/ before CI deploys it. No dependencies, no build: site/ is served as it is.
 // Fails on: missing required pages, broken local links, inline <script> (the CSP blocks it),
 // third-party origins in src/srcset/url() (the CSP blocks them), and text that must never be published.

@@ -22,17 +22,24 @@ Requirements: Node.js 24 and Git. There is no build step: `site/` is served as i
 npm ci                                  # test tools only; the site has no runtime dependencies
 npx playwright install chromium         # once, for the browser tests
 node tools/check-site.mjs               # links, CSP rules, forbidden text
-npm test                                # unit tests with a coverage gate, then browser tests
+npm run lint                            # ESLint; a warning fails like an error
+npm test                                # unit tests, browser tests, then the combined coverage gate
+pipx run reuse lint                     # SPDX header or REUSE.toml entry for every file
 ```
 
 ## Requirements for a change
 
 - **Tests.** New behaviour and every bug fix come with an automated test in `tests/`. CI runs `npm test` on
-  every pull request and fails if coverage of the tested logic drops below the gate (90 % lines, 80 % branches).
+  every pull request. It has two coverage gates: the unit tests alone must cover the demo logic
+  (`site/assets/js/sanad-core.js`: 90 % lines, 80 % branches, 90 % functions), and the unit and browser tests
+  together must cover all site JavaScript (every `site/**/*.js`: 90 % statements and lines, 90 % functions, 80 %
+  branches). The combined report merges Node and Chromium V8 coverage with c8 and is written to `coverage/`; no
+  file or line is excluded from it. c8 counts statements per line, so statements equal lines.
 - **The CSP.** The site is served with `default-src 'self'`: no inline `<script>`, no inline event handlers and
   no third-party origins. `tools/check-site.mjs` enforces this.
-- **Coding standard.** Plain modern JavaScript (ES2022), no frameworks and no runtime dependencies; build the DOM
-  with `textContent` and DOM APIs, never `innerHTML` with data. Keep each language page (`/`, `/en/`, `/ru/`)
+- **Coding standard.** Plain modern JavaScript (ES2022), checked by ESLint (`eslint.config.mjs`: the recommended
+  rules plus no `eval`/`new Function`, no unused variables and `===` except `== null`), no frameworks and no
+  runtime dependencies; build the DOM with `textContent` and DOM APIs, never `innerHTML` with data. Keep each language page (`/`, `/en/`, `/ru/`)
   in sync, and keep the page accessible (WCAG 2.2 AA: contrast, focus, keyboard, `prefers-reduced-motion`).
 - **Honesty.** Plans are labelled as plans. A claim or a number needs a source someone else can check.
 - **One topic per pull request**, Conventional Commits style (`feat:`, `fix:`, `docs:`, `test:`).

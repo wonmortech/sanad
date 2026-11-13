@@ -163,7 +163,14 @@ only the DOM wiring and the page behaves as before.
    zero page errors and zero failed requests; the certificate scan reaches `data-state="ok"` with and without motion
    and `"bad"` for the forged one; editing the name or hours makes the real signature check fail and undoing the edit
    makes it pass; the lookalike issuer and revocation give their own verdicts; markup typed into the demo is shown
-   as text; the theme toggle and the language links work; unknown paths return the 404 page with status 404.
+   as text; the theme toggle and the language links work; unknown paths return the 404 page with status 404. They
+   also cover the mobile menu, the animations with motion allowed and motion switched on at runtime, the theme with
+   storage blocked, and the demo's error paths (no WebCrypto, no Ed25519, key generation failing).
+3. **Combined coverage gate** (`npm run coverage`, c8): the V8 coverage of the unit tests and of every page the
+   browser tests open is merged per file over all `site/**/*.js`, and the run fails below 90 % statements and lines,
+   90 % functions or 80 % branches. Nothing is excluded from measurement.
+
+`npm run lint` (ESLint, warnings fail) and `reuse lint` (SPDX licensing of every file) run in the same job.
 
 `node tools/check-site.mjs` runs before tests and before every deploy, and the deploy workflow then checks the live
 revision, status codes and CSP header, rolling back automatically on failure.

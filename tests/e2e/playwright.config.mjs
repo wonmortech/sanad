@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+// SPDX-License-Identifier: Apache-2.0
+
 // End-to-end tests against site/ served by tests/serve.mjs with the production security headers. Chromium only.
 // Locally, PW_CHROMIUM_PATH can point at an already installed Chromium; CI runs `npx playwright install --with-deps chromium`.
 import { defineConfig, devices } from '@playwright/test';

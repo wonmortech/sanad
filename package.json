@@ -8,13 +8,23 @@
     "node": ">=24"
   },
   "scripts": {
-    "test": "npm run test:unit && npm run test:e2e",
-    "test:unit": "node --test --experimental-test-coverage --test-coverage-include=site/assets/js/sanad-core.js --test-coverage-lines=90 --test-coverage-branches=80 --test-coverage-functions=90 \"tests/unit/*.test.mjs\"",
+    "lint": "eslint . --max-warnings 0",
+    "test": "node tools/v8-coverage.mjs clean && npm run test:unit && npm run test:e2e && npm run coverage",
+    "test:unit": "node tools/v8-coverage.mjs -- node --test --experimental-test-coverage --test-coverage-include=site/assets/js/sanad-core.js --test-coverage-lines=90 --test-coverage-branches=80 --test-coverage-functions=90 \"tests/unit/*.test.mjs\"",
     "test:e2e": "playwright test -c tests/e2e/playwright.config.mjs",
+    "coverage": "c8 report --temp-directory .coverage/v8 --all --include \"site/**/*.js\" --reporter text --reporter html --reporter json-summary --report-dir coverage --check-coverage --statements 90 --lines 90 --functions 90 --branches 80",
     "serve": "node tests/serve.mjs"
   },
   "devDependencies": {
+    "@eslint/js": "10.0.1",
     "@playwright/test": "1.64.1",
-    "fast-check": "4.10.2"
+    "c8": "12.0.0",
+    "eslint": "10.14.0",
+    "fast-check": "4.10.2",
+    "globals": "17.13.0"
+  },
+  "overrides": {
+    "minimatch@^10.0.0": "11.0.3",
+    "glob": "14.0.3"
   }
 }
