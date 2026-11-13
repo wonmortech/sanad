@@ -1,0 +1,5 @@
+.qa/
+node_modules/
+site/version.txt
+.DS_Store
+Thumbs.db

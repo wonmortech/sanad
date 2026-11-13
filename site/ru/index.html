@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanad: сертификат, который несёт свою подпись</title>
+<meta name="description" content="Sanad выпускает сертификаты курсов и бейджи как W3C Verifiable Credentials 2.0 и проверяет их без интернета в Telegram-боте или на веб-странице. Открытый код, без токенов. В планах.">
+<link rel="canonical" href="https://sanad.wonmor.io/ru/">
+<link rel="alternate" hreflang="uz" href="https://sanad.wonmor.io/">
+<link rel="alternate" hreflang="en" href="https://sanad.wonmor.io/en/">
+<link rel="alternate" hreflang="ru" href="https://sanad.wonmor.io/ru/">
+<link rel="alternate" hreflang="x-default" href="https://sanad.wonmor.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sanad">
+<meta property="og:title" content="Sanad: QR-код не подпись">
+<meta property="og:description" content="Сертификат несёт свою подпись. Подлинность можно проверить даже без интернета.">
+<meta property="og:url" content="https://sanad.wonmor.io/ru/">
+<meta property="og:image" content="https://sanad.wonmor.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4f1e8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a1210" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/sanad.css">
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/demo.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/ru/" aria-label="Sanad, главная">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g class="ring" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="16" cy="16" r="14.2" stroke-dasharray="2.2 1.6"/><circle cx="16" cy="16" r="11.4"/></g><path class="tick" d="M10.6 16.4l3.6 3.6 7.4-7.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Sanad
+    </a>
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a href="#muammo">Проблема</a>
+      <a href="#qanday">Как работает</a>
+      <a href="#demo">Демо</a>
+      <a href="#telegram">Telegram</a>
+      <a href="#standartlar">Стандарты</a>
+      <a href="#reja">План</a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Язык">
+        <a href="/" hreflang="uz" lang="uz">UZ</a>
+        <a href="/en/" hreflang="en" lang="en">EN</a>
+        <a href="/ru/" hreflang="ru" lang="ru" aria-current="true">RU</a>
+      </div>
+      <button class="icon-btn" id="theme" type="button" aria-label="Сменить тему">
+        <svg class="theme-ico-light" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <svg class="theme-ico-dark" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <a class="icon-btn gh-btn" href="https://github.com/wonmortech/sanad" aria-label="Репозиторий на GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+      </a>
+      <button class="icon-btn menu-btn" id="menu" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div>
+        <p class="label"><b>Wonmor</b> · открытый код · в планах</p>
+        <h1 id="h1">QR-код не <em>подпись</em>.</h1>
+        <p class="lead">Sanad подписывает сертификаты курсов, бейджи и справки по открытому стандарту. Подпись хранится в самом сертификате, поэтому любой может проверить её в Telegram-боте или в браузере, даже без интернета.</p>
+        <div class="cta">
+          <a class="btn btn--primary" href="#demo">Попробовать демо
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn--ghost" href="https://github.com/wonmortech/sanad">Следить на GitHub</a>
+        </div>
+        <p class="nocoin"><span>Без токенов</span><span>Без платежей в блокчейне</span><span>Пока ничего не выпущено</span></p>
+      </div>
+
+      <div class="stage">
+        <div class="cert-wrap">
+          <article class="cert" id="cert" aria-label="Образец сертификата: Образец Ученик, Основы Python">
+            <canvas class="guil" aria-hidden="true"></canvas>
+            <div class="beam" aria-hidden="true"></div>
+            <div class="cert-in">
+              <div class="cert-head">
+                <div class="cert-org">Образец Учебный Центр</div>
+                <div class="cert-no">№ ОБРАЗЕЦ-0001<br>образец, не настоящий</div>
+              </div>
+              <div class="cert-title">Сертификат</div>
+              <p class="cert-sub">Выдан за успешное окончание курса</p>
+              <dl class="fields">
+                <div class="field"><dt>Кому</dt><dd><span class="val">Образец Ученик</span></dd><span class="mk" aria-hidden="true">✓</span></div>
+                <div class="field"><dt>Дата</dt><dd><span class="val">2026-10-30</span></dd><span class="mk" aria-hidden="true">✓</span></div>
+                <div class="field"><dt>Курс</dt><dd><span class="val">Основы Python</span></dd><span class="mk" aria-hidden="true">✓</span></div>
+                <div class="field" data-real="72 часа" data-forged="144 часа"><dt>Объём</dt><dd><span class="val">72 часа</span></dd><span class="mk" aria-hidden="true">✓</span></div>
+              </dl>
+            </div>
+            <div class="cert-qr" data-qr="11" aria-hidden="true"></div>
+            <div class="seal" aria-hidden="true">
+              <canvas></canvas>
+              <div class="seal-core"><svg viewBox="0 0 60 60"><text class="s-letter" x="30" y="40" text-anchor="middle">S</text><path class="s-ok" d="M16 31l9 9 19-20"/><path class="s-x" d="M19 19l22 22M41 19L19 41"/></svg></div>
+            </div>
+            <div class="proof" aria-hidden="true"></div>
+          </article>
+        </div>
+        <div class="verdict">
+          <div class="seg" role="group" aria-label="Какую копию проверить">
+            <button type="button" id="v-real" aria-pressed="true">Оригинал</button>
+            <button type="button" id="v-fake" aria-pressed="false">Подделка</button>
+            <button type="button" id="v-scan" aria-pressed="false" aria-label="Проверить снова">↻</button>
+          </div>
+          <p class="result" id="result" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="result-text">Ждём подпись</span></p>
+        </div>
+        <p class="stage-note">Это анимация. Настоящая криптографическая проверка в демо ниже.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="muammo" aria-labelledby="h-muammo">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">01 · Проблема</p><h2 id="h-muammo">Фальшивый QR ведёт на фальшивый сайт.</h2></div>
+        <p>QR-код это только адрес. Кто его сканирует, доверяет открывшейся странице, а страницу может сделать кто угодно. Без подписи зелёная галочка ничего не доказывает.</p>
+      </div>
+      <div class="qrpath">
+        <div class="path path--bad rv">
+          <h3>Сегодня: доверие к адресу</h3>
+          <div class="flow">
+            <span class="n">1</span><span>Сканируют QR на сертификате</span>
+            <span class="n">2</span><span class="url">https://<mark>rn</mark>arkaz.example/check</span>
+            <span class="n">3</span><span class="fakeok"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>«Сертификат подлинный»</span>
+          </div>
+          <p class="moral">Страница копирует настоящую: издалека <code>rn</code> выглядит как <code>m</code>. Проверяющий обманут.</p>
+        </div>
+        <div class="path path--good rv">
+          <h3>С Sanad: проверка подписи</h3>
+          <div class="flow">
+            <span class="n">1</span><span>В QR лежит сам подписанный сертификат</span>
+            <span class="n">2</span><span class="url">did:web:markaz.example · ключ в кэше</span>
+            <span class="n">3</span><span class="realbad"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Подделка: подпись не совпадает</span>
+          </div>
+          <p class="moral">Проверяющий не заходит ни на какой сайт. Подпись проверяется математически: изменишь одну букву, и результат «подделка».</p>
+        </div>
+      </div>
+      <p class="src">Источник: Агентство по делам молодёжи, gov.uz (2024-07-08): фальсификаторы «создали фальшивый сайт, похожий на настоящий, и привязали его к поддельному QR-коду». <a href="https://gov.uz/en/yoshlar/news/view/15837">gov.uz/en/yoshlar/news/view/15837</a>. Адреса в примере выдуманы (<code>.example</code>).</p>
+    </div>
+  </section>
+
+  <section class="sec" id="qanday" aria-labelledby="h-qanday">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">02 · Как это работает</p><h2 id="h-qanday">Выпуск, хранение, проверка.</h2></div>
+        <p>Sanad по-арабски «опора»; в науке о хадисах это цепочка «кто от кого подтвердил». Здесь в цепочке три звена.</p>
+      </div>
+      <div class="chain">
+        <svg class="rail" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M64 20 C 300 -10, 360 50, 600 20 S 900 -10, 1136 20"/>
+          <path class="run" d="M64 20 C 300 -10, 360 50, 600 20 S 900 -10, 1136 20"/>
+          <g class="traveller" style="opacity:0"><rect x="-13" y="-9" width="26" height="18" rx="2" style="fill:var(--paper)" stroke="rgb(31 138 116)" stroke-width="1.5"/><path d="M-7 -3h10M-7 1h14M-7 5h8" stroke="rgb(31 138 116)" stroke-width="1.3"/></g>
+        </svg>
+        <div class="node rv">
+          <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 40V18l14-9 14 9v22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M18 40V28h12v12M6 40h36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+          <h3>Выпуск</h3>
+          <p class="who">Учебный центр</p>
+          <p>Загружается список выпускников (CSV). Каждый сертификат подписывается ключом центра как W3C Verifiable Credential.</p>
+          <code>did:web:markaz.example</code>
+        </div>
+        <div class="node rv">
+          <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="13" y="5" width="22" height="38" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M19 15h10M19 21h10M19 27h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="24" cy="36" r="2" fill="currentColor"/></svg></div>
+          <h3>Хранение</h3>
+          <p class="who">Выпускник</p>
+          <p>Сертификат остаётся у выпускника: QR в PDF, в Telegram или файлом. Не нужен ни сайт, ни аккаунт.</p>
+          <code>QR = подписанные данные</code>
+        </div>
+        <div class="node rv">
+          <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 24.5l5.5 5.5L33 18.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Проверка</h3>
+          <p class="who">Работодатель, HR</p>
+          <p>QR показывают Telegram-боту или веб-проверке. Подпись проверяется на месте по ключу из кэша, за секунды.</p>
+          <code>подлинный · подделка · отозван</code>
+        </div>
+      </div>
+      <div class="offline rv">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 15a20 20 0 0 1 28 0M11 20.5a13 13 0 0 1 18 0M16 26a6 6 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="20" cy="31" r="2.2" fill="currentColor"/><path d="M6 6l28 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <div><b>Даже без интернета</b><p>Для проверки подписи сеть не нужна. Интернет нужен только для необязательного шага: не отозвал ли издатель сертификат (Bitstring Status List).</p></div>
+        <span class="chip chip--plan">В планах</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="demo" aria-labelledby="h-demo">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">03 · Демо <span class="chip chip--demo">в вашем браузере</span></p><h2 id="h-demo">Измените одно поле.</h2></div>
+        <p>Вот образец сертификата (JSON). Ключ только что создан в вашем браузере и никуда не отправляется. Нажмите переключатель: подпись действительно перепроверяется через WebCrypto.</p>
+      </div>
+      <div class="demo">
+        <div class="pane">
+          <div class="pane-bar"><span>credential.json</span><span class="chip chip--demo">образец</span></div>
+          <pre class="json" id="cred" tabindex="0" aria-label="Образец сертификата в JSON">…</pre>
+        </div>
+        <div class="pane">
+          <div class="tamper">
+            <h3>Что попробует фальсификатор</h3>
+            <label class="sw"><input type="checkbox" id="t-name"><span>Заменить имя</span></label>
+            <label class="name-edit">Или впишите имя сами
+              <input type="text" id="t-name-in" autocomplete="off" spellcheck="false">
+            </label>
+            <label class="sw"><input type="checkbox" id="t-hours"><span>Увеличить курс с 72 до 144 часов</span></label>
+            <label class="sw"><input type="checkbox" id="t-issuer"><span>Переподписать ключом центра-двойника<small>did:web:rnarkaz.example</small></span></label>
+            <label class="sw"><input type="checkbox" id="t-rev" class="rev"><span>Центр отозвал сертификат<small>не подделка, а статус</small></span></label>
+          </div>
+          <ol class="steps" id="steps" aria-live="polite"></ol>
+          <div class="verdict-big" id="verdict" aria-live="polite"><div><b>Готовим…</b></div></div>
+          <p class="src" id="meta" style="margin:0 18px 16px"></p>
+        </div>
+      </div>
+      <p class="demo-note">Это демо, а не настоящий сертификат. Упрощено: ключи JSON сортируются (как JCS), и SHA-256 этого текста подписывается Ed25519 (ECDSA P-256, если браузер не умеет Ed25519). Настоящий Sanad планирует полностью следовать W3C Data Integrity (<code>eddsa-jcs-2022</code>) и Bitstring Status List; здесь ключ <code>did:web</code> и список статусов заданы как объекты в кэше.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="telegram" aria-labelledby="h-tg">
+    <div class="wrap tg">
+      <div class="tg-copy rv">
+        <p class="label">04 · Telegram <span class="chip chip--soon">Скоро</span></p>
+        <h2 id="h-tg" style="font-size:clamp(36px,4.6vw,72px);margin-top:14px">Отправьте фото, получите ответ.</h2>
+        <p class="lead" style="margin-top:20px">Работодателю не нужно ничего устанавливать. Он отправляет боту фото QR, бот проверяет подпись и простыми словами говорит, что доказано.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>На узбекском (латиница), русском и английском</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Три результата: подлинный, подделка или отозван</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Говорит и о том, что не доказано: подпись доказывает, что центр выдал сертификат, а не знания человека</span></li>
+        </ul>
+      </div>
+      <div class="phone rv" aria-label="Макет Telegram-бота, пока не работает" role="img">
+        <div class="screen">
+          <div class="tg-bar"><span class="tg-av" aria-hidden="true">S</span><div><b>Sanad bot</b><small>макет</small></div><span class="chip chip--soon">Скоро</span></div>
+          <div class="chat" id="chat" aria-hidden="true">
+            <div class="msg me"><div class="qrimg" data-qr="11"></div>Проверь, пожалуйста, этот сертификат</div>
+            <div class="msg bot" data-typing><span class="typing"><i></i><i></i><i></i></span></div>
+            <div class="msg bot"><div class="res ok">✓ Подлинный сертификат</div><dl><dt>Кому</dt><dd>Образец Ученик</dd><dt>Курс</dt><dd>Основы Python, 72 ч</dd><dt>Издатель</dt><dd>Образец Учебный Центр</dd><dt>Статус</dt><dd>не отозван</dd></dl></div>
+            <div class="msg me"><div class="qrimg" data-qr="29"></div>А этот?</div>
+            <div class="msg bot" data-typing><span class="typing"><i></i><i></i><i></i></span></div>
+            <div class="msg bot"><div class="res bad">✗ Подпись не совпадает</div>Сертификат изменили после подписи. Не доверяйте ему.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="kimlar" aria-labelledby="h-kim">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">05 · Для кого</p><h2 id="h-kim">Кто выдаёт, хранит и проверяет.</h2></div>
+        <p>Sanad для собственных сертификатов частных организаций. Государственные документы (дипломы, ID) не выпускаются и не имитируются.</p>
+      </div>
+      <div class="aud">
+        <article class="rv">
+          <p class="label">Издатель</p>
+          <h3>Учебные центры и IT-курсы</h3>
+          <p>Подделывать ваши сертификаты станет бессмысленно. Сотни подписанных сертификатов из одного CSV, ошибочный можно отозвать.</p>
+          <p class="gets">CSV → подписанный VC → PDF + QR</p>
+        </article>
+        <article class="rv">
+          <p class="label">Издатель</p>
+          <h3>Университеты и мероприятия</h3>
+          <p>Курсы дополнительного образования, тренинги, сертификаты олимпиад и хакатонов.</p>
+          <p class="not">Не государственные дипломы: за них отвечают официальные системы.</p>
+          <p class="gets">Open Badges 3.0</p>
+        </article>
+        <article class="rv">
+          <p class="label">Проверяющий</p>
+          <h3>Работодатели и HR</h3>
+          <p>Проверить сертификат кандидата за минуту, не доверяя никаким сайтам.</p>
+          <p class="gets">Telegram или браузер</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="standartlar" aria-labelledby="h-std">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">06 · Открытые стандарты</p><h2 id="h-std">Ничего самодельного.</h2></div>
+        <p>Sanad строится только на открытых опубликованных стандартах. Сертификат останется проверяемым, даже если Sanad закроется: его прочитает любая совместимая программа.</p>
+      </div>
+      <div class="stds rv">
+        <a class="std" href="https://www.w3.org/TR/vc-data-model-2.0/"><b>Verifiable Credentials 2.0</b><span>Модель данных подписанных утверждений</span><small>W3C Recommendation · 2025-05-15</small></a>
+        <a class="std" href="https://www.w3.org/TR/vc-data-integrity/"><b>VC Data Integrity 1.0</b><span>Как ставится подпись (proof)</span><small>W3C Recommendation · 2025-05-15</small></a>
+        <a class="std" href="https://www.w3.org/TR/vc-di-eddsa/"><b>EdDSA cryptosuites</b><span><code>eddsa-jcs-2022</code>, Ed25519</span><small>W3C Recommendation · 2025-05-15</small></a>
+        <a class="std" href="https://www.w3.org/TR/vc-bitstring-status-list/"><b>Bitstring Status List</b><span>Список отзыва с сохранением приватности</span><small>W3C Recommendation · 2025-05-15</small></a>
+        <a class="std" href="https://www.imsglobal.org/spec/ob/v3p0/"><b>Open Badges 3.0</b><span>Бейджи курсов поверх VC</span><small>1EdTech · Final Release</small></a>
+        <a class="std" href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html"><b>OpenID4VCI 1.0</b><span>Выпуск в кошельки (позже)</span><small>OpenID Final · 2025-09-16</small></a>
+        <a class="std" href="https://w3c-ccg.github.io/did-method-web/"><b>did:web</b><span>Ключ издателя на его домене</span><small>W3C CCG</small></a>
+        <a class="std" href="https://www.rfc-editor.org/info/rfc9901"><b>SD-JWT</b><span>Показывать только нужное поле (позже)</span><small>IETF RFC 9901 · 2025-11</small></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="reja" aria-labelledby="h-reja">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">07 · План</p><h2 id="h-reja">MVP за 8 недель.</h2></div>
+        <p>Sanad делит ядро (ключи, Merkle-журнал) с проектом Muhr, поэтому стартует после него. Все этапы пока в планах.</p>
+      </div>
+      <ol class="road rv">
+        <li><span class="wk">Неделя 1</span><b>Схемы</b><p>Open Badges 3.0: «Курс окончен» и «Контрибьютор»; did:web для wonmor.io.</p><span class="chip chip--plan">В планах</span></li>
+        <li><span class="wk">Неделя 2</span><b>Issuer CLI</b><p>Подписанные VC из CSV.</p><span class="chip chip--plan">В планах</span></li>
+        <li><span class="wk">Неделя 3</span><b>Веб-проверка</b><p>В браузере, офлайн, с блоком «что это доказывает».</p><span class="chip chip--plan">В планах</span></li>
+        <li><span class="wk">Неделя 4</span><b>Telegram-бот</b><p>Фото QR → результат; uz, ru, en.</p><span class="chip chip--soon">Скоро</span></li>
+        <li><span class="wk">Неделя 5</span><b>Шаблон PDF</b><p>VC внутри QR, готово к печати.</p><span class="chip chip--plan">В планах</span></li>
+        <li><span class="wk">Неделя 6</span><b>Отзыв</b><p>Bitstring Status List; дата выпуска фиксируется через Muhr.</p><span class="chip chip--plan">В планах</span></li>
+        <li><span class="wk">Неделя 7</span><b>Панель издателя</b><p>Ротация ключей, отзыв, экспорт.</p><span class="chip chip--plan">В планах</span></li>
+        <li><span class="wk">Неделя 8</span><b>Пилот и v0.1</b><p>Первые бейджи для контрибьюторов открытых репозиториев Wonmor.</p><span class="chip chip--plan">В планах</span></li>
+      </ol>
+      <div class="later rv">
+        <div><b>v1</b><p>Пилот с внешним учебным центром, аудит безопасности, выпуск в кошельки через OpenID4VCI.</p></div>
+        <div><b>Позже</b><p>Выборочное раскрытие через SD-JWT; изучить возможность связи с EIMZO.</p></div>
+        <div><b>Никогда</b><p>Токены, NFT, криптоплатежи, выпуск государственных документов.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="holat" aria-labelledby="h-holat">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">08 · Честный статус</p><h2 id="h-holat">Что есть сейчас, а чего нет.</h2></div>
+        <p>Wonmor никогда не попросит у вас деньги, пароли или ключи. Официальные адреса: sanad.wonmor.io и github.com/wonmortech.</p>
+      </div>
+      <div class="status rv">
+        <div class="yes"><h3>Есть</h3><ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Исследование: конкуренты, стандарты, правовой статус</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>План и архитектура</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Эта страница и демо в браузере</li>
+        </ul></div>
+        <div class="no"><h3>Пока нет</h3><ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/></svg>Сервис издателя и CLI</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/></svg>Telegram-бот</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/></svg>Ни одного выпущенного сертификата или пользователя</li>
+        </ul></div>
+        <div class="lim"><h3>Ограничения</h3><ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Подпись Sanad не является и не заменяет электронную цифровую подпись EIMZO (закон ЗРУ-793)</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Подпись доказывает, кто выдал, а не что знает человек</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Правовые вопросы у юриста; ждём ответа</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="havolalar" aria-labelledby="h-links">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">09 · Ссылки</p><h2 id="h-links">Сначала прочитайте код, потом доверяйте.</h2></div>
+        <p>Вопросы, идеи и ошибки: откройте issue на GitHub. Это единственный канал связи.</p>
+      </div>
+      <div class="links">
+        <a class="lk rv" href="https://github.com/wonmortech/sanad"><b>Репозиторий</b><span>Код, Apache-2.0</span><small>github.com/wonmortech/sanad</small></a>
+        <a class="lk rv" href="https://github.com/wonmortech/sanad/tree/main/docs"><b>Документы</b><span>Исследование, план, правовые заметки (на узбекском)</span><small>docs/</small></a>
+        <a class="lk rv" href="https://github.com/wonmortech/sanad/issues"><b>Открыть issue</b><span>Вопросы и идеи</span><small>github.com/wonmortech/sanad/issues</small></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><b>Sanad</b><p><a href="https://wonmor.io">Проект Wonmor</a>. Открытый инструмент для проверяемых сертификатов.</p></div>
+    <div><h3>Семейство</h3><ul>
+      <li><a href="https://muhr.wonmor.io">Muhr</a>: штамп времени для документов</li>
+      <li><a href="https://shaffof.wonmor.io">Shaffof</a>: открытая отчётность</li>
+      <li><a href="https://wonmor.io">wonmor.io</a></li>
+    </ul></div>
+    <div><h3>Проект</h3><ul>
+      <li><a href="https://github.com/wonmortech/sanad">GitHub</a></li>
+      <li><a href="https://github.com/wonmortech/sanad/blob/main/LICENSE">Лицензия: Apache-2.0</a></li>
+      <li><a href="/" hreflang="uz" lang="uz">Oʻzbekcha</a> · <a href="/en/" hreflang="en" lang="en">English</a></li>
+    </ul></div>
+    <p class="fine">Все имена, организации и адреса на странице вымышлены. На сайте нет аналитики и cookie.</p>
+  </div>
+</footer>
+</body>
+</html>

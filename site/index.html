@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="uz" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanad: imzoni oʻzi olib yuradigan sertifikat</title>
+<meta name="description" content="Sanad: kurs sertifikatlari va badgeʼlar W3C Verifiable Credentials 2.0 shaklida chiqariladi va Telegram bot yoki veb sahifada internetsiz tekshiriladi. Ochiq kod, token yoʻq. Rejalashtirilmoqda.">
+<link rel="canonical" href="https://sanad.wonmor.io/">
+<link rel="alternate" hreflang="uz" href="https://sanad.wonmor.io/">
+<link rel="alternate" hreflang="en" href="https://sanad.wonmor.io/en/">
+<link rel="alternate" hreflang="ru" href="https://sanad.wonmor.io/ru/">
+<link rel="alternate" hreflang="x-default" href="https://sanad.wonmor.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sanad">
+<meta property="og:title" content="Sanad: QR kod imzo emas">
+<meta property="og:description" content="Sertifikat imzoni oʻzi bilan olib yuradi. Internet boʻlmasa ham haqiqiyligini tekshirsa boʻladi.">
+<meta property="og:url" content="https://sanad.wonmor.io/">
+<meta property="og:image" content="https://sanad.wonmor.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="uz_UZ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f4f1e8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a1210" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/sanad.css">
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/demo.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Asosiy qismga oʻtish</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Sanad, bosh sahifa">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><g class="ring" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="16" cy="16" r="14.2" stroke-dasharray="2.2 1.6"/><circle cx="16" cy="16" r="11.4"/></g><path class="tick" d="M10.6 16.4l3.6 3.6 7.4-7.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Sanad
+    </a>
+    <nav class="nav" id="nav" aria-label="Boʻlimlar">
+      <a href="#muammo">Muammo</a>
+      <a href="#qanday">Qanday ishlaydi</a>
+      <a href="#demo">Demo</a>
+      <a href="#telegram">Telegram</a>
+      <a href="#standartlar">Standartlar</a>
+      <a href="#reja">Reja</a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Til">
+        <a href="/" hreflang="uz" lang="uz" aria-current="true">UZ</a>
+        <a href="/en/" hreflang="en" lang="en">EN</a>
+        <a href="/ru/" hreflang="ru" lang="ru">RU</a>
+      </div>
+      <button class="icon-btn" id="theme" type="button" aria-label="Mavzuni almashtirish">
+        <svg class="theme-ico-light" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <svg class="theme-ico-dark" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <a class="icon-btn gh-btn" href="https://github.com/wonmortech/sanad" aria-label="GitHub repozitoriyasi">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+      </a>
+      <button class="icon-btn menu-btn" id="menu" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menyuni ochish">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div>
+        <p class="label"><b>Wonmor</b> · ochiq kod · rejalashtirilmoqda</p>
+        <h1 id="h1">QR kod <em>imzo</em> emas.</h1>
+        <p class="lead">Sanad kurs sertifikati, badge va maʼlumotnomalarni ochiq standart boʻyicha raqamli imzolaydi. Imzo sertifikatning oʻzida turadi, shuning uchun uni istalgan kishi Telegram botda yoki brauzerda, hatto internetsiz ham tekshira oladi.</p>
+        <div class="cta">
+          <a class="btn btn--primary" href="#demo">Demoni sinash
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn btn--ghost" href="https://github.com/wonmortech/sanad">GitHubʼda kuzatish</a>
+        </div>
+        <p class="nocoin"><span>Token yoʻq</span><span>Blokcheyn toʻlovi yoʻq</span><span>Hali hech narsa chiqarilmagan</span></p>
+      </div>
+
+      <div class="stage">
+        <div class="cert-wrap">
+          <article class="cert" id="cert" aria-label="Namuna sertifikat: Namuna Oʻquvchi, Python asoslari">
+            <canvas class="guil" aria-hidden="true"></canvas>
+            <div class="beam" aria-hidden="true"></div>
+            <div class="cert-in">
+              <div class="cert-head">
+                <div class="cert-org">Namuna Oʻquv Markazi</div>
+                <div class="cert-no">No. NAMUNA-0001<br>namuna, haqiqiy emas</div>
+              </div>
+              <div class="cert-title">Sertifikat</div>
+              <p class="cert-sub">Quyidagi kursni muvaffaqiyatli tugatgani uchun beriladi</p>
+              <dl class="fields">
+                <div class="field"><dt>Oluvchi</dt><dd><span class="val">Namuna Oʻquvchi</span></dd><span class="mk" aria-hidden="true">✓</span></div>
+                <div class="field"><dt>Sana</dt><dd><span class="val">2026-10-30</span></dd><span class="mk" aria-hidden="true">✓</span></div>
+                <div class="field"><dt>Kurs</dt><dd><span class="val">Python asoslari</span></dd><span class="mk" aria-hidden="true">✓</span></div>
+                <div class="field" data-real="72 soat" data-forged="144 soat"><dt>Hajmi</dt><dd><span class="val">72 soat</span></dd><span class="mk" aria-hidden="true">✓</span></div>
+              </dl>
+            </div>
+            <div class="cert-qr" data-qr="11" aria-hidden="true"></div>
+            <div class="seal" aria-hidden="true">
+              <canvas></canvas>
+              <div class="seal-core"><svg viewBox="0 0 60 60"><text class="s-letter" x="30" y="40" text-anchor="middle">S</text><path class="s-ok" d="M16 31l9 9 19-20"/><path class="s-x" d="M19 19l22 22M41 19L19 41"/></svg></div>
+            </div>
+            <div class="proof" aria-hidden="true"></div>
+          </article>
+        </div>
+        <div class="verdict">
+          <div class="seg" role="group" aria-label="Qaysi nusxani tekshirish">
+            <button type="button" id="v-real" aria-pressed="true">Asl nusxa</button>
+            <button type="button" id="v-fake" aria-pressed="false">Soxta nusxa</button>
+            <button type="button" id="v-scan" aria-pressed="false" aria-label="Qayta skanerlash">↻</button>
+          </div>
+          <p class="result" id="result" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="result-text">Imzo kutilmoqda</span></p>
+        </div>
+        <p class="stage-note">Bu animatsiya. Haqiqiy kriptografik tekshiruv pastdagi demoda.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="muammo" aria-labelledby="h-muammo">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">01 · Muammo</p><h2 id="h-muammo">Soxta QR soxta saytga olib boradi.</h2></div>
+        <p>QR kod faqat manzil. Uni skanerlagan odam ochilgan sahifaga ishonadi, sahifani esa istalgan kishi yasay oladi. Imzo boʻlmasa, «yashil belgi» hech narsani isbotlamaydi.</p>
+      </div>
+      <div class="qrpath">
+        <div class="path path--bad rv">
+          <h3>Bugun: manzilga ishonish</h3>
+          <div class="flow">
+            <span class="n">1</span><span>Sertifikatdagi QR skanerlanadi</span>
+            <span class="n">2</span><span class="url">https://<mark>rn</mark>arkaz.example/tekshirish</span>
+            <span class="n">3</span><span class="fakeok"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>«Sertifikat haqiqiy»</span>
+          </div>
+          <p class="moral">Sahifa haqiqiysiga oʻxshatib yasalgan: <code>rn</code> uzoqdan <code>m</code> boʻlib koʻrinadi. Tekshiruvchi aldanadi.</p>
+        </div>
+        <div class="path path--good rv">
+          <h3>Sanad bilan: imzoni tekshirish</h3>
+          <div class="flow">
+            <span class="n">1</span><span>QR ichida imzolangan sertifikatning oʻzi bor</span>
+            <span class="n">2</span><span class="url">did:web:markaz.example · kalit keshda</span>
+            <span class="n">3</span><span class="realbad"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Soxta nusxa: imzo mos emas</span>
+          </div>
+          <p class="moral">Tekshiruvchi hech qanday saytga kirmaydi. Imzo matematik tekshiriladi: bitta harf oʻzgarsa ham natija «soxta».</p>
+        </div>
+      </div>
+      <p class="src">Manba: Yoshlar ishlari agentligi, gov.uz (2024-07-08): soxtakorlar «haqiqiysiga oʻxshash soxta sayt yasab, uni soxta QR kodiga bogʻlagan». <a href="https://gov.uz/en/yoshlar/news/view/15837">gov.uz/en/yoshlar/news/view/15837</a>. Misoldagi manzillar oʻylab topilgan (<code>.example</code>).</p>
+    </div>
+  </section>
+
+  <section class="sec" id="qanday" aria-labelledby="h-qanday">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">02 · Qanday ishlaydi</p><h2 id="h-qanday">Chiqarish, saqlash, tekshirish.</h2></div>
+        <p>Sanad arabcha «tayanch» degani; hadis ilmida «kim kimdan tasdiqlagan» zanjiri. Bu yerda ham zanjir uch halqadan iborat.</p>
+      </div>
+      <div class="chain">
+        <svg class="rail" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M64 20 C 300 -10, 360 50, 600 20 S 900 -10, 1136 20"/>
+          <path class="run" d="M64 20 C 300 -10, 360 50, 600 20 S 900 -10, 1136 20"/>
+          <g class="traveller" style="opacity:0"><rect x="-13" y="-9" width="26" height="18" rx="2" style="fill:var(--paper)" stroke="rgb(31 138 116)" stroke-width="1.5"/><path d="M-7 -3h10M-7 1h14M-7 5h8" stroke="rgb(31 138 116)" stroke-width="1.3"/></g>
+        </svg>
+        <div class="node rv">
+          <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 40V18l14-9 14 9v22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M18 40V28h12v12M6 40h36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+          <h3>Chiqarish</h3>
+          <p class="who">Oʻquv markazi</p>
+          <p>Bitiruvchilar roʻyxati (CSV) yuklanadi. Har biri uchun sertifikat W3C Verifiable Credential sifatida markazning kaliti bilan imzolanadi.</p>
+          <code>did:web:markaz.example</code>
+        </div>
+        <div class="node rv">
+          <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="13" y="5" width="22" height="38" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M19 15h10M19 21h10M19 27h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="24" cy="36" r="2" fill="currentColor"/></svg></div>
+          <h3>Saqlash</h3>
+          <p class="who">Bitiruvchi</p>
+          <p>Sertifikat bitiruvchida qoladi: PDF ichida QR, Telegram yoki fayl. Unga hech qanday sayt yoki akkaunt kerak emas.</p>
+          <code>QR = imzolangan maʼlumot</code>
+        </div>
+        <div class="node rv">
+          <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 24.5l5.5 5.5L33 18.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Tekshirish</h3>
+          <p class="who">Ish beruvchi, HR</p>
+          <p>QR Telegram botga yoki veb tekshiruvchiga koʻrsatiladi. Imzo keshlangan kalit bilan joyida tekshiriladi, natija bir necha soniyada.</p>
+          <code>haqiqiy · soxta · bekor qilingan</code>
+        </div>
+      </div>
+      <div class="offline rv">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 15a20 20 0 0 1 28 0M11 20.5a13 13 0 0 1 18 0M16 26a6 6 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="20" cy="31" r="2.2" fill="currentColor"/><path d="M6 6l28 28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <div><b>Internet boʻlmasa ham</b><p>Imzoni tekshirish uchun tarmoq kerak emas. Internet faqat ixtiyoriy qadam uchun kerak: beruvchi sertifikatni keyinroq bekor qilganmi (Bitstring Status List) yoki yoʻqmi.</p></div>
+        <span class="chip chip--plan">Rejada</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="demo" aria-labelledby="h-demo">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">03 · Demo <span class="chip chip--demo">brauzeringizda</span></p><h2 id="h-demo">Bitta maydonni oʻzgartirib koʻring.</h2></div>
+        <p>Mana namuna sertifikat (JSON). Kalit hozir sizning brauzeringizda yaratildi va hech qayerga yuborilmaydi. Tugmani bosing: imzo tekshiruvi haqiqatan WebCrypto bilan qayta bajariladi.</p>
+      </div>
+      <div class="demo">
+        <div class="pane">
+          <div class="pane-bar"><span>credential.json</span><span class="chip chip--demo">namuna</span></div>
+          <pre class="json" id="cred" tabindex="0" aria-label="Namuna sertifikat JSON koʻrinishida">…</pre>
+        </div>
+        <div class="pane">
+          <div class="tamper">
+            <h3>Soxtakorning harakatlari</h3>
+            <label class="sw"><input type="checkbox" id="t-name"><span>Ismni almashtirish</span></label>
+            <label class="name-edit">Yoki ismni oʻzingiz yozing
+              <input type="text" id="t-name-in" autocomplete="off" spellcheck="false">
+            </label>
+            <label class="sw"><input type="checkbox" id="t-hours"><span>Kurs hajmini 72 dan 144 soatga</span></label>
+            <label class="sw"><input type="checkbox" id="t-issuer"><span>Oʻxshash nomli markaz kaliti bilan qayta imzolash<small>did:web:rnarkaz.example</small></span></label>
+            <label class="sw"><input type="checkbox" id="t-rev" class="rev"><span>Markaz sertifikatni bekor qildi<small>soxtalik emas, holat</small></span></label>
+          </div>
+          <ol class="steps" id="steps" aria-live="polite"></ol>
+          <div class="verdict-big" id="verdict" aria-live="polite"><div><b>Tayyorlanmoqda…</b></div></div>
+          <p class="src" id="meta" style="margin:0 18px 16px"></p>
+        </div>
+      </div>
+      <p class="demo-note">Bu demo, haqiqiy sertifikat emas. Soddalashtirilgan: JSON kalitlari tartiblanadi (JCS ga oʻxshash), shu matnning SHA-256 xeshi Ed25519 bilan imzolanadi (brauzer Ed25519 ni qoʻllamasa ECDSA P-256). Haqiqiy Sanad W3C Data Integrity (<code>eddsa-jcs-2022</code>) va Bitstring Status List spetsifikatsiyalariga toʻliq amal qilishi rejalashtirilgan; <code>did:web</code> kaliti va status roʻyxati bu yerda keshlangan obyekt sifatida berilgan.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="telegram" aria-labelledby="h-tg">
+    <div class="wrap tg">
+      <div class="tg-copy rv">
+        <p class="label">04 · Telegram <span class="chip chip--soon">Tez kunda</span></p>
+        <h2 id="h-tg" style="font-size:clamp(36px,4.6vw,72px);margin-top:14px">Rasmni yuboring, javobni oling.</h2>
+        <p class="lead" style="margin-top:20px">Ish beruvchiga ilova oʻrnatish shart emas. Sertifikatdagi QR rasmini botga yuboradi, bot imzoni tekshirib, nima isbotlanganini oddiy tilda aytadi.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Oʻzbek (lotin), rus va ingliz tillarida</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Natija uch xil: haqiqiy, soxta yoki bekor qilingan</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Nima isbotlanmasligini ham aytadi: masalan, imzo bu odamning bilimini emas, markaz shu sertifikatni berganini isbotlaydi</span></li>
+        </ul>
+      </div>
+      <div class="phone rv" aria-label="Telegram bot namunasi, hali ishlamaydi" role="img">
+        <div class="screen">
+          <div class="tg-bar"><span class="tg-av" aria-hidden="true">S</span><div><b>Sanad bot</b><small>namuna</small></div><span class="chip chip--soon">Tez kunda</span></div>
+          <div class="chat" id="chat" aria-hidden="true">
+            <div class="msg me"><div class="qrimg" data-qr="11"></div>Shu sertifikatni tekshirib bering</div>
+            <div class="msg bot" data-typing><span class="typing"><i></i><i></i><i></i></span></div>
+            <div class="msg bot"><div class="res ok">✓ Haqiqiy sertifikat</div><dl><dt>Kimga</dt><dd>Namuna Oʻquvchi</dd><dt>Kurs</dt><dd>Python asoslari, 72 soat</dd><dt>Beruvchi</dt><dd>Namuna Oʻquv Markazi</dd><dt>Holat</dt><dd>bekor qilinmagan</dd></dl></div>
+            <div class="msg me"><div class="qrimg" data-qr="29"></div>Bunisi-chi?</div>
+            <div class="msg bot" data-typing><span class="typing"><i></i><i></i><i></i></span></div>
+            <div class="msg bot"><div class="res bad">✗ Imzo mos emas</div>Sertifikat imzolangandan keyin oʻzgartirilgan. Unga ishonmang.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="kimlar" aria-labelledby="h-kim">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">05 · Kim uchun</p><h2 id="h-kim">Beradigan, oladigan, tekshiradigan.</h2></div>
+        <p>Sanad xususiy tashkilotlarning oʻz sertifikatlari uchun. Davlat hujjatlari (diplom, ID) chiqarilmaydi va ularga taqlid qilinmaydi.</p>
+      </div>
+      <div class="aud">
+        <article class="rv">
+          <p class="label">Beruvchi</p>
+          <h3>Oʻquv markazlari va IT kurslar</h3>
+          <p>Sertifikatlaringizni soxtalashtirish befoyda boʻladi. Bitta CSV dan yuzlab imzolangan sertifikat, xato chiqqanini bekor qilish mumkin.</p>
+          <p class="gets">CSV → imzolangan VC → PDF + QR</p>
+        </article>
+        <article class="rv">
+          <p class="label">Beruvchi</p>
+          <h3>Universitetlar va tadbirlar</h3>
+          <p>Qoʻshimcha taʼlim kurslari, treninglar, olimpiada va hakaton sertifikatlari.</p>
+          <p class="not">Davlat diplomi emas: unga rasmiy tizimlar javob beradi.</p>
+          <p class="gets">Open Badges 3.0</p>
+        </article>
+        <article class="rv">
+          <p class="label">Tekshiruvchi</p>
+          <h3>Ish beruvchi va HR</h3>
+          <p>Nomzodning sertifikatini bir daqiqada, saytlarga ishonmasdan tekshirish.</p>
+          <p class="gets">Telegram yoki brauzer</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="standartlar" aria-labelledby="h-std">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">06 · Ochiq standartlar</p><h2 id="h-std">Oʻzimiz oʻylab topmaymiz.</h2></div>
+        <p>Sanad faqat ochiq, nashr etilgan standartlar ustiga quriladi. Sertifikat Sanad yopilsa ham tekshiriladigan boʻlib qoladi: istalgan mos dastur uni oʻqiy oladi.</p>
+      </div>
+      <div class="stds rv">
+        <a class="std" href="https://www.w3.org/TR/vc-data-model-2.0/"><b>Verifiable Credentials 2.0</b><span>Imzolangan daʼvolar maʼlumot modeli</span><small>W3C Recommendation · 2025-05-15</small></a>
+        <a class="std" href="https://www.w3.org/TR/vc-data-integrity/"><b>VC Data Integrity 1.0</b><span>Imzo (proof) qanday qoʻyiladi</span><small>W3C Recommendation · 2025-05-15</small></a>
+        <a class="std" href="https://www.w3.org/TR/vc-di-eddsa/"><b>EdDSA cryptosuites</b><span><code>eddsa-jcs-2022</code>, Ed25519</span><small>W3C Recommendation · 2025-05-15</small></a>
+        <a class="std" href="https://www.w3.org/TR/vc-bitstring-status-list/"><b>Bitstring Status List</b><span>Bekor qilish roʻyxati, maxfiylikni saqlab</span><small>W3C Recommendation · 2025-05-15</small></a>
+        <a class="std" href="https://www.imsglobal.org/spec/ob/v3p0/"><b>Open Badges 3.0</b><span>Kurs badgeʼlari, VC ustida</span><small>1EdTech · Final Release</small></a>
+        <a class="std" href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html"><b>OpenID4VCI 1.0</b><span>Hamyonlarga chiqarish (keyinroq)</span><small>OpenID Final · 2025-09-16</small></a>
+        <a class="std" href="https://w3c-ccg.github.io/did-method-web/"><b>did:web</b><span>Beruvchi kaliti oʻz domenida</span><small>W3C CCG</small></a>
+        <a class="std" href="https://www.rfc-editor.org/info/rfc9901"><b>SD-JWT</b><span>Faqat kerakli maydonni koʻrsatish (keyinroq)</span><small>IETF RFC 9901 · 2025-11</small></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="reja" aria-labelledby="h-reja">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">07 · Reja</p><h2 id="h-reja">8 haftalik MVP.</h2></div>
+        <p>Sanad singlisi Muhr bilan umumiy yadroga (kalitlar, Merkle jurnal) tayanadi, shuning uchun Muhrdan keyin boshlanadi. Hamma bosqich hali rejada.</p>
+      </div>
+      <ol class="road rv">
+        <li><span class="wk">1-hafta</span><b>Sxemalar</b><p>Open Badges 3.0: «Kurs tugatildi» va «Hissa qoʻshuvchi»; wonmor.io uchun did:web.</p><span class="chip chip--plan">Rejada</span></li>
+        <li><span class="wk">2-hafta</span><b>Issuer CLI</b><p>CSV dan imzolangan VC lar.</p><span class="chip chip--plan">Rejada</span></li>
+        <li><span class="wk">3-hafta</span><b>Veb tekshiruvchi</b><p>Brauzerda, oflayn; «nimani isbotlaydi» bloki bilan.</p><span class="chip chip--plan">Rejada</span></li>
+        <li><span class="wk">4-hafta</span><b>Telegram bot</b><p>QR rasmi → natija; uz, ru, en.</p><span class="chip chip--soon">Tez kunda</span></li>
+        <li><span class="wk">5-hafta</span><b>PDF shablon</b><p>VC QR ichida, chop etishga tayyor.</p><span class="chip chip--plan">Rejada</span></li>
+        <li><span class="wk">6-hafta</span><b>Bekor qilish</b><p>Bitstring Status List; chiqarilgan sana Muhr bilan muhrlanadi.</p><span class="chip chip--plan">Rejada</span></li>
+        <li><span class="wk">7-hafta</span><b>Issuer paneli</b><p>Kalit rotatsiyasi, bekor qilish, eksport.</p><span class="chip chip--plan">Rejada</span></li>
+        <li><span class="wk">8-hafta</span><b>Pilot va v0.1</b><p>Wonmor ochiq repolari hissa qoʻshuvchilariga birinchi badgeʼlar.</p><span class="chip chip--plan">Rejada</span></li>
+      </ol>
+      <div class="later rv">
+        <div><b>v1</b><p>Tashqi oʻquv markazi bilan pilot, xavfsizlik koʻrigi, OpenID4VCI orqali hamyonlarga chiqarish.</p></div>
+        <div><b>Keyinroq</b><p>SD-JWT bilan faqat kerakli maydonni koʻrsatish, EIMZO bilan bogʻlash imkoniyatini oʻrganish.</p></div>
+        <div><b>Hech qachon</b><p>Token, NFT, kripto toʻlov, davlat hujjatlarini chiqarish.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="holat" aria-labelledby="h-holat">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">08 · Halol holat</p><h2 id="h-holat">Hozir nima bor, nima yoʻq.</h2></div>
+        <p>Wonmor hech qachon sizdan pul, parol yoki kalit soʻramaydi. Rasmiy manzillar: sanad.wonmor.io va github.com/wonmortech.</p>
+      </div>
+      <div class="status rv">
+        <div class="yes"><h3>Bor</h3><ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Tadqiqot: raqobatchilar, standartlar, huquqiy holat</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Reja va arxitektura</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Shu sahifa va brauzerdagi demo</li>
+        </ul></div>
+        <div class="no"><h3>Hali yoʻq</h3><ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/></svg>Issuer xizmati va CLI</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/></svg>Telegram bot</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3"/></svg>Birorta chiqarilgan sertifikat yoki foydalanuvchi</li>
+        </ul></div>
+        <div class="lim"><h3>Chegaralar</h3><ul>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Sanad imzosi EIMZO elektron raqamli imzosi (ZRU-793) emas va oʻrnini bosmaydi</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Imzo kim berganini isbotlaydi, odamning bilimini emas</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Huquqiy savollar yuristga yuborilgan, javob kutilmoqda</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="havolalar" aria-labelledby="h-links">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><p class="label">09 · Havolalar</p><h2 id="h-links">Kodni oʻqing, keyin ishoning.</h2></div>
+        <p>Savol, taklif yoki xato boʻlsa, GitHubʼda issue oching. Bu yagona aloqa kanali.</p>
+      </div>
+      <div class="links">
+        <a class="lk rv" href="https://github.com/wonmortech/sanad"><b>Repozitoriya</b><span>Kod, Apache-2.0</span><small>github.com/wonmortech/sanad</small></a>
+        <a class="lk rv" href="https://github.com/wonmortech/sanad/tree/main/docs"><b>Hujjatlar</b><span>Tadqiqot, reja, huquqiy eslatmalar</span><small>docs/</small></a>
+        <a class="lk rv" href="https://github.com/wonmortech/sanad/issues"><b>Issue ochish</b><span>Savollar va takliflar</span><small>github.com/wonmortech/sanad/issues</small></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><b>Sanad</b><p><a href="https://wonmor.io">Wonmor loyihasi</a>. Tekshiriladigan sertifikatlar uchun ochiq vosita.</p></div>
+    <div><h3>Oila</h3><ul>
+      <li><a href="https://muhr.wonmor.io">Muhr</a>: hujjat muhrlash</li>
+      <li><a href="https://shaffof.wonmor.io">Shaffof</a>: ochiq hisob</li>
+      <li><a href="https://wonmor.io">wonmor.io</a></li>
+    </ul></div>
+    <div><h3>Loyiha</h3><ul>
+      <li><a href="https://github.com/wonmortech/sanad">GitHub</a></li>
+      <li><a href="https://github.com/wonmortech/sanad/blob/main/LICENSE">Litsenziya: Apache-2.0</a></li>
+      <li><a href="/en/" hreflang="en" lang="en">English</a> · <a href="/ru/" hreflang="ru" lang="ru">Русский</a></li>
+    </ul></div>
+    <p class="fine">Sahifadagi barcha ism, tashkilot va manzillar namuna. Saytda kuzatuv (analytics) va cookie yoʻq.</p>
+  </div>
+</footer>
+</body>
+</html>

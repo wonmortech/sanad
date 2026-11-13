@@ -1,0 +1,87 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", "deploy/Caddyfile", "tools/check-site.mjs", ".github/workflows/deploy.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One deploy at a time, never cancelled half-way.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      SITE: https://sanad.wonmor.io
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - name: Check site
+        run: node tools/check-site.mjs
+
+      - name: Stamp version
+        run: printf '%s\n' "$GITHUB_SHA" > site/version.txt
+
+      # The key is bound on the server to bin/receive (authorized_keys: restrict,command=...),
+      # so it can publish a release and nothing else. Host key is pinned, never trusted on first use.
+      - name: Ship
+        id: ship
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          tar -czf - site -C deploy Caddyfile \
+            | ssh -i ~/.ssh/deploy -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+                "root@$DEPLOY_HOST" "deploy $GITHUB_SHA"
+
+      - name: Verify live revision
+        run: |
+          for _ in $(seq 1 20); do
+            if curl -fsS "$SITE/version.txt" | grep -qx "$GITHUB_SHA"; then echo "live: $GITHUB_SHA"; exit 0; fi
+            sleep 3
+          done
+          echo "::error::$SITE/version.txt did not return $GITHUB_SHA"; exit 1
+
+      - name: Smoke test
+        run: |
+          fail=0
+          for p in / /en/ /ru/ /robots.txt /sitemap.xml /favicon.svg; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE$p")
+            echo "$code $p"; [ "$code" = 200 ] || fail=1
+          done
+          code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE/this-page-does-not-exist/")
+          echo "$code /this-page-does-not-exist/ (want 404)"; [ "$code" = 404 ] || fail=1
+          curl -sI "$SITE/" | tr -d '\r' | grep -qi "^content-security-policy: default-src 'self'" || { echo "::error::CSP missing"; fail=1; }
+          exit $fail
+
+      - name: Roll back
+        if: failure() && steps.ship.outcome == 'success'
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: ssh -i ~/.ssh/deploy -o BatchMode=yes -o IdentitiesOnly=yes "root@$DEPLOY_HOST" rollback
+
+      - name: Clean up key
+        if: always()
+        run: rm -f ~/.ssh/deploy
+
+      - name: Summary
+        if: success()
+        run: echo "### Deployed [\`${GITHUB_SHA::7}\`]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA) to $SITE" >> "$GITHUB_STEP_SUMMARY"

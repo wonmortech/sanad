@@ -1,0 +1,17 @@
+services:
+  sanad-site:
+    image: caddy:2-alpine
+    container_name: sanad-site
+    restart: unless-stopped
+    volumes:
+      # Config directory (not a single file) so a replaced Caddyfile is visible to `caddy reload`.
+      - ./conf:/etc/caddy:ro
+      - ./releases:/srv/releases:ro
+    networks:
+      - edge
+
+# The shared edge Caddy is on this network and proxies sanad.wonmor.io -> sanad-site:80
+networks:
+  edge:
+    external: true
+    name: dtwin-prod_default
