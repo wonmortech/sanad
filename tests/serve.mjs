@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+// SPDX-License-Identifier: Apache-2.0
+
 // Dependency-free static server for site/, used by the e2e tests (and `npm run serve`).
 // It sends the security headers from deploy/Caddyfile, so a CSP violation fails the tests the same way it would
 // break the live site, and it answers unknown paths with 404.html and status 404, like Caddy's handle_errors.

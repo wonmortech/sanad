@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+// SPDX-License-Identifier: Apache-2.0
+
 /* Sanad demo logic without the DOM: canonical form, encodings, signing and verification, the verdict, the strings and
    the HTML that the demo writes. Loaded as a classic script before demo.js (exposes globalThis.SanadCore) and imported
    by the unit tests in Node. Every piece of data that reaches HTML goes through esc().

@@ -9,6 +9,23 @@ documents change, there is no released product yet.
 
 ### Added
 - Property-based tests with fast-check on random input, run in CI with the unit tests.
+- ESLint (`npm run lint`, warnings fail) over the site scripts, tests and tools, run in the CI `build` job.
+- Coverage of all site JavaScript: Chromium coverage from the browser tests is merged with the unit-test coverage
+  and gated in CI at 90 % statements and lines, 90 % functions and 80 % branches over every `site/**/*.js` file.
+- Browser tests for the mobile menu, the animations with motion allowed (tilt, chain rail, chat), switching motion
+  on at runtime, the theme with storage blocked, and the demo without WebCrypto or without Ed25519.
+- SPDX copyright and licence headers in every source file, `REUSE.toml` for the rest, `LICENSES/`, and a
+  `reuse lint` check in the CI `build` job.
+- "Verifying a release" section in SECURITY.md.
+
+### Changed
+- GOVERNANCE.md states the real continuity situation (both maintainer accounts belong to the founder) and lists an
+  independent second owner as an open goal.
+- README: contact options now include SECURITY.md and Telegram for vulnerabilities; the licence note no longer
+  says the `LICENSE` file is still to come.
+
+### Fixed
+- Removed an unused variable in the certificate scan code (found by ESLint).
 
 ## [0.1.0] - 2026-11-14
 

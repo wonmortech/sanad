@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+# SPDX-License-Identifier: Apache-2.0
+
 version: 2
 updates:
   - package-ecosystem: github-actions

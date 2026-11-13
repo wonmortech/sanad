@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+// SPDX-License-Identifier: Apache-2.0
+
 /* Sanad in-browser demo. A real Ed25519 signature (WebCrypto) over a simplified Open Badges 3.0 style credential.
    Simplified on purpose: JSON keys are sorted (JCS-like), the SHA-256 of that text and of the proof options is signed,
    and the "did:web" lookup and the revocation list are local, cached objects. Keys are made fresh in your browser on

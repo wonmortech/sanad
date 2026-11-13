@@ -31,5 +31,23 @@ We credit reporters in the advisory if they wish. Good-faith research that follo
 [organization security policy](https://github.com/wonmortech/.github/blob/main/SECURITY.md) is welcome and
 covered by its safe-harbour section. There is no paid bug bounty.
 
+## Verifying a release
+
+Each release on GitHub carries the site archive, a `SHA256SUMS` file and build provenance. The archive is built
+twice and compared byte for byte, and the provenance is signed with Sigstore (GitHub artifact attestations) by
+[.github/workflows/release.yml](.github/workflows/release.yml). To check a download, with the
+[GitHub CLI](https://cli.github.com/):
+
+```sh
+gh release download v0.1.0 -R wonmortech/sanad
+sha256sum -c SHA256SUMS
+gh attestation verify sanad-site-0.1.0.tar.gz -R wonmortech/sanad
+```
+
+`sha256sum -c` must print `OK` for the archive, and `gh attestation verify` must report that the archive was
+built by the release workflow of `wonmortech/sanad`. Replace `v0.1.0` and `0.1.0` with the release you downloaded.
+
+## More
+
 A machine-readable contact file is published at [https://sanad.wonmor.io/.well-known/security.txt](https://sanad.wonmor.io/.well-known/security.txt).
 The security design of the project is described in [docs/ASSURANCE.md](docs/ASSURANCE.md).

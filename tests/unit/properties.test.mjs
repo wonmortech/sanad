@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+// SPDX-License-Identifier: Apache-2.0
+
 // Property-based tests (fast-check): canonical JSON, base64url and the signature check on random input.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

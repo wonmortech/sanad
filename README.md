@@ -51,18 +51,30 @@ credential can be anchored there.
 docs/research/   research in Uzbek: competitors, references, inspiration, legal notes
 docs/PLAN.md     goals, architecture, MVP milestones, risks, open questions
 site/            the static home page (no build step)
+tests/           unit, property-based and browser tests
+tools/           site checker and coverage helper
+deploy/          Caddy configuration and deploy scripts
 ```
 
-To preview the site, serve `site/` with any static server, for example `npx serve site`.
+To preview the site, run `npm run serve` (it sends the production security headers), or serve `site/` with any
+static server. Development and the checks a change must pass: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Contact
 
-Open a [GitHub issue](https://github.com/wonmortech/sanad/issues). It is the only contact channel.
-Wonmor will never ask you for money, passwords or keys.
+Questions, bugs and ideas: open a [GitHub issue](https://github.com/wonmortech/sanad/issues).
+Vulnerabilities: not in public, see [SECURITY.md](SECURITY.md) (GitHub private reporting, or Telegram
+<https://t.me/xnosir>). Wonmor will never ask you for money, passwords or keys.
+
+## Releases
+
+Release archives come with `SHA256SUMS` and Sigstore-signed build provenance:
+see [Verifying a release](SECURITY.md#verifying-a-release).
 
 ## License
 
-[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) (the `LICENSE` file is added when the repository is created). Fonts in `site/fonts/` are under the SIL Open Font License (see the `LICENSE-*.txt` files there).
+[Apache-2.0](LICENSE). Fonts in `site/fonts/` are under the SIL Open Font License 1.1 (see the `LICENSE-*.txt`
+files there). Every file states its copyright and licence in an SPDX header or in [REUSE.toml](REUSE.toml), and
+CI checks this with [`reuse lint`](https://reuse.software/); the licence texts are in [LICENSES/](LICENSES/).
 
 ---
 

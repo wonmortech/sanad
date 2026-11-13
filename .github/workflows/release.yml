@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+# SPDX-License-Identifier: Apache-2.0
+
 name: release
 
 # On a version tag: build a reproducible archive of site/, check it is byte-identical when built twice,
@@ -44,7 +47,7 @@ jobs:
           epoch=$(git log -1 --format=%ct)
           pack() {
             tar --sort=name --mtime="@$epoch" --owner=0 --group=0 --numeric-owner \
-                --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime -cf - site LICENSE | gzip -n -9 > "$1"
+                --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=atime,delete=ctime -cf - site LICENSE LICENSES REUSE.toml | gzip -n -9 > "$1"
           }
           mkdir -p dist
           pack "dist/$name"

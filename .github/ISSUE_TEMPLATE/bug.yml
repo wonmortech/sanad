@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+# SPDX-License-Identifier: Apache-2.0
+
 name: Bug
 description: Something on the site or in the docs is wrong or broken
 labels: ["bug"]

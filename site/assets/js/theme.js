@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+// SPDX-License-Identifier: Apache-2.0
+
 /* Runs before first paint: applies a saved theme choice. Without one the page follows the system. */
 (function () {
   var d = document.documentElement;

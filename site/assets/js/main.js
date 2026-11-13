@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+// SPDX-License-Identifier: Apache-2.0
+
 /* Sanad home page: header, reveal, the living certificate (guilloche + scan), the chain rail and the chat mock.
    No dependencies. Everything pauses off screen and respects prefers-reduced-motion. */
 (function () {
@@ -186,7 +189,7 @@
     /* scan story: genuine -> verified, forged -> fails */
     var beam = $('.beam', cert), proof = $('.proof', cert), res = $('#result'), resText = $('#result-text');
     var fields = $$('.field', cert), btnReal = $('#v-real'), btnFake = $('#v-fake'), btnScan = $('#v-scan');
-    var mode = 'real', auto = true, running = false, token = 0;
+    var mode = 'real', auto = true, token = 0;
     function setMode(m) {
       mode = m;
       btnReal.setAttribute('aria-pressed', m === 'real' ? 'true' : 'false');
@@ -208,7 +211,7 @@
       proof.textContent = T.proofIdle;
     }
     function scan() {
-      var my = ++token; running = true; clear();
+      var my = ++token; clear();
       resText.textContent = T.scanning;
       var H = cert.clientHeight, dur = reduce.matches ? 0 : 2600, start = performance.now();
       cert.classList.add('scanning');
@@ -230,7 +233,7 @@
             cert.setAttribute('data-state', st); res.setAttribute('data-state', st);
             resText.textContent = st === 'ok' ? T.ok : T.bad;
             proof.textContent = st === 'ok' ? T.proofOk : T.proofBad;
-            running = false; resolve(true);
+            resolve(true);
           }
         }
         requestAnimationFrame(step);

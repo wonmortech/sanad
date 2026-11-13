@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+# SPDX-License-Identifier: Apache-2.0
 # Admin-side deploy tools. Day-to-day deploys run in GitHub Actions (.github/workflows/deploy.yml);
 # this script is for the server owner, over an ordinary admin SSH login.
 #
