@@ -45,7 +45,7 @@ for (const f of files) {
   if (ext === '.html') {
     if (!/<html[^>]+lang="/.test(src)) errors.push(`${rel(f)}: <html> has no lang`);
     if (!/<title>[^<]+<\/title>/.test(src)) errors.push(`${rel(f)}: no <title>`);
-    for (const m of src.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+    for (const m of src.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\b[^>]*>/gi)) {
       if (/type="application\/(ld\+)?json"/.test(m[1])) continue;
       if (!/\bsrc=/.test(m[1]) || m[2].trim()) errors.push(`${rel(f)}: inline <script> (blocked by the CSP)`);
     }

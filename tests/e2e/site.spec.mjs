@@ -149,7 +149,7 @@ for (const p of PAGES) {
       for (const other of PAGES.filter((o) => o !== p)) {
         await page.goto(p.path);
         await page.locator(`header .lang a[hreflang="${other.lang}"]`).click();
-        await expect(page).toHaveURL(new RegExp(`${other.path.replace(/\//g, '\\/')}$`));
+        await expect(page).toHaveURL((url) => url.pathname === other.path);
         await expect(page.locator('html')).toHaveAttribute('lang', other.lang);
       }
     });
