@@ -58,7 +58,7 @@ jobs:
       - name: Verify live revision
         run: |
           for _ in $(seq 1 20); do
-            if curl -fsS "$SITE/version.txt" | grep -qx "$GITHUB_SHA"; then echo "live: $GITHUB_SHA"; exit 0; fi
+            if curl -fsS --retry 4 --retry-all-errors --retry-delay 3 --connect-timeout 10 --max-time 30 "$SITE/version.txt" | grep -qx "$GITHUB_SHA"; then echo "live: $GITHUB_SHA"; exit 0; fi
             sleep 3
           done
           echo "::error::$SITE/version.txt did not return $GITHUB_SHA"; exit 1
@@ -67,12 +67,12 @@ jobs:
         run: |
           fail=0
           for p in / /en/ /ru/ /robots.txt /sitemap.xml /favicon.svg; do
-            code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE$p")
+            code=$(curl -s --retry 4 --retry-all-errors --retry-delay 3 --connect-timeout 10 --max-time 30 -o /dev/null -w '%{http_code}' "$SITE$p")
             echo "$code $p"; [ "$code" = 200 ] || fail=1
           done
-          code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE/this-page-does-not-exist/")
+          code=$(curl -s --retry 4 --retry-all-errors --retry-delay 3 --connect-timeout 10 --max-time 30 -o /dev/null -w '%{http_code}' "$SITE/this-page-does-not-exist/")
           echo "$code /this-page-does-not-exist/ (want 404)"; [ "$code" = 404 ] || fail=1
-          curl -sI "$SITE/" | tr -d '\r' | grep -qi "^content-security-policy: default-src 'self'" || { echo "::error::CSP missing"; fail=1; }
+          curl -sI --retry 4 --retry-all-errors --retry-delay 3 --connect-timeout 10 --max-time 30 "$SITE/" | tr -d '\r' | grep -qi "^content-security-policy: default-src 'self'" || { echo "::error::CSP missing"; fail=1; }
           exit $fail
 
       - name: Roll back
