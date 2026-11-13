@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="/assets/css/sanad.css">
 <script src="/assets/js/theme.js"></script>
 <script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/sanad-core.js" defer></script>
 <script src="/assets/js/demo.js" defer></script>
 </head>
 <body>
@@ -221,7 +222,7 @@
           <p class="src" id="meta" style="margin:0 18px 16px"></p>
         </div>
       </div>
-      <p class="demo-note">This is a demo, not a real certificate. Simplified: JSON keys are sorted (JCS-like) and the SHA-256 of that text is signed with Ed25519 (ECDSA P-256 if your browser lacks Ed25519). The real Sanad is planned to follow W3C Data Integrity (<code>eddsa-jcs-2022</code>) and Bitstring Status List in full; here the <code>did:web</code> key and the status list are cached objects.</p>
+      <p class="demo-note">This is a demo, not a real certificate. Simplified: JSON keys are sorted (JCS-like) and the SHA-256 of that text, together with the SHA-256 of the proof options, is signed with Ed25519 (ECDSA P-256 if your browser lacks Ed25519). The real Sanad is planned to follow W3C Data Integrity (<code>eddsa-jcs-2022</code>) and Bitstring Status List in full; here the <code>did:web</code> key and the status list are cached objects.</p>
     </div>
   </section>
 
