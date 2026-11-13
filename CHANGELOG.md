@@ -7,6 +7,9 @@ documents change, there is no released product yet.
 
 ## [Unreleased]
 
+### Added
+- Property-based tests with fast-check on random input, run in CI with the unit tests.
+
 ## [0.1.0] - 2026-11-14
 
 ### Added
