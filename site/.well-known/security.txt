@@ -1,0 +1,6 @@
+Contact: https://github.com/wonmortech/sanad/security/advisories/new
+Contact: https://t.me/xnosir
+Expires: 2027-11-13T00:00:00.000Z
+Preferred-Languages: uz, en, ru
+Canonical: https://sanad.wonmor.io/.well-known/security.txt
+Policy: https://github.com/wonmortech/sanad/blob/main/SECURITY.md

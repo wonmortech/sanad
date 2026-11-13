@@ -1,5 +1,11 @@
 # Sanad
 
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/16669/badge)](https://www.bestpractices.dev/projects/16669)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/wonmortech/sanad/badge)](https://scorecard.dev/viewer/?uri=github.com/wonmortech/sanad)
+[![CI](https://github.com/wonmortech/sanad/actions/workflows/ci.yml/badge.svg)](https://github.com/wonmortech/sanad/actions/workflows/ci.yml)
+[![Mozilla Observatory A+](https://img.shields.io/badge/Mozilla_Observatory-A%2B-brightgreen)](https://developer.mozilla.org/en-US/observatory/analyze?host=sanad.wonmor.io)
+[![SSL Labs A+](https://img.shields.io/badge/SSL_Labs-A%2B-brightgreen)](https://www.ssllabs.com/ssltest/analyze.html?d=sanad.wonmor.io)
+
 **Certificates that carry their own signature.** Sanad issues course certificates, badges and references as
 [W3C Verifiable Credentials 2.0](https://www.w3.org/TR/vc-data-model-2.0/) (compatible with
 [Open Badges 3.0](https://www.imsglobal.org/spec/ob/v3p0/)) and lets anyone verify them **offline**, through a

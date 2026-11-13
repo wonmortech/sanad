@@ -1,0 +1,45 @@
+name: dco
+
+# Every commit in a pull request must carry a "Signed-off-by:" line (CONTRIBUTING.md, DCO).
+# Merge commits and Dependabot commits are skipped. The PR code is only read, never executed.
+on:
+  pull_request:
+
+concurrency:
+  group: dco-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  dco:
+    name: dco
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Signed-off-by
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          missing=0
+          for c in $(git rev-list --no-merges "$BASE..$HEAD"); do
+            email=$(git log -1 --format='%ae' "$c")
+            if [ "$email" = "49699333+dependabot[bot]@users.noreply.github.com" ]; then continue; fi
+            if git log -1 --format='%B' "$c" | grep -qE '^Signed-off-by: .+ <[^>]+@[^>]+>$'; then
+              echo "ok      $c"
+            else
+              echo "::error::commit $c has no 'Signed-off-by: Name <email>' line (use git commit -s)"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "Fix: git rebase --signoff origin/main && git push --force-with-lease"
+            exit 1
+          fi

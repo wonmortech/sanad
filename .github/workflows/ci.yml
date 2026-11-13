@@ -30,3 +30,14 @@ jobs:
       # third-party origins (the CSP would block them) and anything that must never be published.
       - name: Check site
         run: node tools/check-site.mjs
+
+      # Unit tests with a coverage gate over the demo logic, then Chromium end-to-end tests against site/
+      # served with the production security headers (tests/serve.mjs reads them from deploy/Caddyfile).
+      - name: Install test dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Test
+        run: npm test
