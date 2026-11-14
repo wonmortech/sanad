@@ -165,7 +165,7 @@
         <svg class="rail" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
           <path d="M64 20 C 300 -10, 360 50, 600 20 S 900 -10, 1136 20"/>
           <path class="run" d="M64 20 C 300 -10, 360 50, 600 20 S 900 -10, 1136 20"/>
-          <g class="traveller" style="opacity:0"><rect x="-13" y="-9" width="26" height="18" rx="2" style="fill:var(--paper)" stroke="rgb(31 138 116)" stroke-width="1.5"/><path d="M-7 -3h10M-7 1h14M-7 5h8" stroke="rgb(31 138 116)" stroke-width="1.3"/></g>
+          <g class="traveller"><rect x="-13" y="-9" width="26" height="18" rx="2" stroke="rgb(31 138 116)" stroke-width="1.5"/><path d="M-7 -3h10M-7 1h14M-7 5h8" stroke="rgb(31 138 116)" stroke-width="1.3"/></g>
         </svg>
         <div class="node rv">
           <div class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 40V18l14-9 14 9v22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M18 40V28h12v12M6 40h36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></div>
@@ -221,7 +221,7 @@
           </div>
           <ol class="steps" id="steps" aria-live="polite"></ol>
           <div class="verdict-big" id="verdict" aria-live="polite"><div><b>Preparing…</b></div></div>
-          <p class="src" id="meta" style="margin:0 18px 16px"></p>
+          <p class="src src--meta" id="meta"></p>
         </div>
       </div>
       <p class="demo-note">This is a demo, not a real certificate. Simplified: JSON keys are sorted (JCS-like) and the SHA-256 of that text, together with the SHA-256 of the proof options, is signed with Ed25519 (ECDSA P-256 if your browser lacks Ed25519). The real Sanad is planned to follow W3C Data Integrity (<code>eddsa-jcs-2022</code>) and Bitstring Status List in full; here the <code>did:web</code> key and the status list are cached objects.</p>
@@ -232,8 +232,8 @@
     <div class="wrap tg">
       <div class="tg-copy rv">
         <p class="label">04 · Telegram <span class="chip chip--soon">Soon</span></p>
-        <h2 id="h-tg" style="font-size:clamp(36px,4.6vw,72px);margin-top:14px">Send a photo, get an answer.</h2>
-        <p class="lead" style="margin-top:20px">An employer installs nothing. They send a photo of the QR to the bot; the bot checks the signature and says in plain words what it proves.</p>
+        <h2 id="h-tg">Send a photo, get an answer.</h2>
+        <p class="lead">An employer installs nothing. They send a photo of the QR to the bot; the bot checks the signature and says in plain words what it proves.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>In Uzbek (Latin), Russian and English</span></li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Three results: genuine, forged or revoked</span></li>

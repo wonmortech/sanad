@@ -36,8 +36,8 @@ pipx run reuse lint                     # SPDX header or REUSE.toml entry for ev
   together must cover all site JavaScript (every `site/**/*.js`: 90 % statements and lines, 90 % functions, 80 %
   branches). The combined report merges Node and Chromium V8 coverage with c8 and is written to `coverage/`; no
   file or line is excluded from it. c8 counts statements per line, so statements equal lines.
-- **The CSP.** The site is served with `default-src 'self'`: no inline `<script>`, no inline event handlers and
-  no third-party origins. `tools/check-site.mjs` enforces this.
+- **The CSP.** The site is served with `default-src 'self'`: no inline `<script>`, no inline event handlers, no
+  `style` attributes or `<style>` elements (put styles in `site/assets/css/sanad.css`) and no third-party origins. `tools/check-site.mjs` enforces this.
 - **Coding standard.** Plain modern JavaScript (ES2022), checked by ESLint (`eslint.config.mjs`: the recommended
   rules plus no `eval`/`new Function`, no unused variables and `===` except `== null`), no frameworks and no
   runtime dependencies; build the DOM with `textContent` and DOM APIs, never `innerHTML` with data. Keep each language page (`/`, `/en/`, `/ru/`)

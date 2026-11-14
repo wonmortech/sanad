@@ -32,6 +32,11 @@ documents change, there is no released product yet.
 ### Fixed
 - Removed an unused variable in the certificate scan code (found by ESLint).
 
+### Security
+- The CSP no longer allows `style-src 'unsafe-inline'`. The inline styles of the home pages and of the demo's step
+  icons moved into `sanad.css`, the favicon's `<style>` is allowed by its sha256 hash, and `tools/check-site.mjs`
+  fails on any new inline style (#7).
+
 ## [0.1.0] - 2026-11-14
 
 ### Added

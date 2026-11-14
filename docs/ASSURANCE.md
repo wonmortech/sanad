@@ -62,7 +62,8 @@ browser on each load, are non-extractable and are never sent anywhere.
 
 1. **Browser ↔ site.** Everything the browser receives is static and same-origin. The CSP
    (`default-src 'self'; script-src 'self'; ... frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'`)
-   means only our own script files run; inline scripts and event handlers are blocked. Inside the page, demo input is
+   means only our own script and style files apply; inline scripts, event handlers and inline styles are blocked
+   (`style-src 'self'` plus the sha256 hash of the favicon's own `<style>`). Inside the page, demo input is
    untrusted and only ever reaches the DOM through an escaping function or `textContent`.
 2. **Edge proxy ↔ site container.** The edge terminates TLS and adds `Strict-Transport-Security`; the container sets
    CSP, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy` and `Cross-Origin-Opener-Policy`.
@@ -139,8 +140,6 @@ only the DOM wiring and the page behaves as before.
   `eddsa-jcs-2022` cryptosuite.
 - **Algorithm fallback.** In browsers without Ed25519 the demo uses ECDSA P-256 and says so on screen. This depends
   on the browser, not on attacker input.
-- **`style-src 'unsafe-inline'`.** Needed for a few `style` attributes. Without an HTML injection it gives an
-  attacker nothing; HTML injection is countered as described above.
 - **HSTS** is set without `includeSubDomains` and `preload`, so the very first visit over plain HTTP can still be
   intercepted.
 - **Trusted infrastructure.** Whoever controls the shared edge proxy, the host, the GitHub organisation or the
