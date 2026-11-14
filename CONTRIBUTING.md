@@ -20,6 +20,7 @@ Requirements: Node.js 24 and Git. There is no build step: `site/` is served as i
 
 ```sh
 npm ci                                  # test tools only; the site has no runtime dependencies
+npm run serve                           # the site at the address it prints; Ctrl+C to stop
 npx playwright install chromium         # once, for the browser tests
 node tools/check-site.mjs               # links, CSP rules, forbidden text
 npm run lint                            # ESLint; a warning fails like an error
