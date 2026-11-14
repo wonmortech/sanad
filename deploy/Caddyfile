@@ -20,7 +20,7 @@
 	header @rest Cache-Control "no-cache"
 
 	header {
-		Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+		Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'sha256-y8K55UD19BmUb/68u/uDinnnnZwD4JjBVgr61zWsTLw='; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
 		Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
 		Referrer-Policy strict-origin-when-cross-origin
 		X-Content-Type-Options nosniff
