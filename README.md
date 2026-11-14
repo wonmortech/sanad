@@ -70,6 +70,12 @@ Vulnerabilities: not in public, see [SECURITY.md](SECURITY.md) (GitHub private r
 Release archives come with `SHA256SUMS` and Sigstore-signed build provenance:
 see [Verifying a release](SECURITY.md#verifying-a-release).
 
+## Contributing
+
+Issues and pull requests are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), and look for issues labelled
+[good first issue](https://github.com/wonmortech/sanad/labels/good%20first%20issue). Every commit needs a
+`Signed-off-by` line (`git commit -s`).
+
 ## License
 
 [Apache-2.0](LICENSE). Fonts in `site/fonts/` are under the SIL Open Font License 1.1 (see the `LICENSE-*.txt`
