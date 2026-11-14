@@ -19,8 +19,8 @@ documents change, there is no released product yet.
 - "Verifying a release" section in SECURITY.md.
 
 ### Changed
-- GOVERNANCE.md states the real continuity situation (both maintainer accounts belong to the founder) and lists an
-  independent second owner as an open goal.
+- GOVERNANCE.md names two independent owners and maintainers, @wonmors (founder) and @xnosir (technical
+  maintainer), and states openly that the founder's account runs delegated automation during setup.
 - README: contact options now include SECURITY.md and Telegram for vulnerabilities; the licence note no longer
   says the `LICENSE` file is still to come.
 
