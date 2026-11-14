@@ -59,7 +59,7 @@ unsigned commit; fix it with `git rebase --signoff origin/main` and push again.
 ## Review and merge
 
 Every change goes through a pull request. It needs green CI (`build`, `dco`) and at least one approving review
-from a maintainer other than the author whenever another maintainer is available ([GOVERNANCE.md](GOVERNANCE.md)).
+from a maintainer other than the author ([GOVERNANCE.md](GOVERNANCE.md)); the branch rules of `main` enforce both.
 We squash-merge and delete the branch.
 
 ## Licence and conduct
