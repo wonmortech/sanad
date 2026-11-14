@@ -29,6 +29,10 @@ documents change, there is no released product yet.
   says the `LICENSE` file is still to come.
 - Development dependencies updated (npm group).
 
+### Security
+- The CSP no longer allows `style-src 'unsafe-inline'`. The page and demo styles moved into the stylesheet, the
+  favicon's `<style>` is allowed by its sha256 hash, and `tools/check-site.mjs` fails on any new inline style.
+
 ### Fixed
 - Removed an unused variable in the certificate scan code (found by ESLint).
 

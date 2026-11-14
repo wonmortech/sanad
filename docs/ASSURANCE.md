@@ -82,7 +82,7 @@ browser on each load, are non-extractable and are never sent anywhere.
 | Principle | How it is applied |
 | --- | --- |
 | Economy of mechanism | No build step, no backend, no runtime dependencies, about 600 lines of first-party JavaScript. The demo logic is one DOM-free file that is unit tested on its own. |
-| Fail-safe defaults | CSP denies everything not explicitly same-origin. The demo verdict is checked in a fixed order (signature, then trust, then status) and starts from "not verified". A missing, malformed or unknown status entry counts as revoked. Malformed proofs, unknown keys and decoding errors all end as "Forged". |
+| Fail-safe defaults | CSP denies everything not explicitly same-origin, and no inline style is allowed except the favicon's `<style>`, pinned by its sha256 hash (`tools/check-site.mjs` fails on a `style` attribute in a page or in script-built markup, a `<style>` in a page, or an SVG `<style>` whose hash is not in the CSP). The demo verdict is checked in a fixed order (signature, then trust, then status) and starts from "not verified". A missing, malformed or unknown status entry counts as revoked. Malformed proofs, unknown keys and decoding errors all end as "Forged". |
 | Complete mediation | Every edit re-runs canonicalisation, hashing and signature verification from scratch; nothing is cached between runs except the keys. Every string that reaches `innerHTML` passes through `esc()`. |
 | Open design | All code is public. Security rests on standard algorithms (Ed25519, SHA-256 via WebCrypto) and the CSP, not on secrecy. |
 | Separation of privilege | Pull request checks run without secrets; deploying needs a merge to `main` (required `build` check, code owners) and the deploy secrets; the server accepts only the forced command. |
@@ -139,8 +139,6 @@ only the DOM wiring and the page behaves as before.
   `eddsa-jcs-2022` cryptosuite.
 - **Algorithm fallback.** In browsers without Ed25519 the demo uses ECDSA P-256 and says so on screen. This depends
   on the browser, not on attacker input.
-- **`style-src 'unsafe-inline'`.** Needed for a few `style` attributes. Without an HTML injection it gives an
-  attacker nothing; HTML injection is countered as described above.
 - **HSTS** is set without `includeSubDomains` and `preload`, so the very first visit over plain HTTP can still be
   intercepted.
 - **Trusted infrastructure.** Whoever controls the shared edge proxy, the host, the GitHub organisation or the

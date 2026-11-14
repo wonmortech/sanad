@@ -2,11 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 // Checks site/ before CI deploys it. No dependencies, no build: site/ is served as it is.
-// Fails on: missing required pages, broken local links, inline <script> (the CSP blocks it),
+// Fails on: missing required pages, broken local links, inline <script>, style attributes and <style> (the CSP blocks them),
 // third-party origins in src/srcset/url() (the CSP blocks them), and text that must never be published.
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative, dirname, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const ROOT = fileURLToPath(new URL('../site/', import.meta.url));
 const REQUIRED = ['index.html', 'en/index.html', 'ru/index.html', '404.html', 'robots.txt', 'sitemap.xml', 'favicon.svg'];
@@ -19,6 +20,8 @@ const FORBIDDEN = [
   /\b(ghp|gho|github_pat)_[A-Za-z0-9_]{20,}/,
   /-----BEGIN [A-Z ]*PRIVATE KEY-----/,
 ];
+// The CSP allows no inline style except the <style> inside the SVG files (the favicon), by its sha256 hash.
+const CSP = readFileSync(fileURLToPath(new URL('../deploy/Caddyfile', import.meta.url)), 'utf8').match(/Content-Security-Policy "([^"]+)"/)?.[1] ?? '';
 const TEXT = new Set(['.html', '.css', '.js', '.mjs', '.svg', '.txt', '.xml', '.json', '.webmanifest']);
 
 const errors = [];
@@ -53,6 +56,8 @@ for (const f of files) {
       if (!/\bsrc=/.test(m[1]) || m[2].trim()) errors.push(`${rel(f)}: inline <script> (blocked by the CSP)`);
     }
     if (/<[a-z][^>]*\son[a-z]+\s*=\s*["']/i.test(src)) errors.push(`${rel(f)}: inline event handler (blocked by the CSP)`);
+    if (/<[a-z][^>]*\sstyle\s*=\s*["']/i.test(src)) errors.push(`${rel(f)}: inline style attribute (blocked by the CSP)`);
+    if (/<style\b/i.test(src)) errors.push(`${rel(f)}: inline <style> element (blocked by the CSP)`);
     for (const m of src.matchAll(/\b(?:src|srcset|poster)="([^"]+)"/g)) {
       for (const u of m[1].split(',').map((s) => s.trim().split(/\s+/)[0])) {
         if (/^(https?:)?\/\//.test(u)) { errors.push(`${rel(f)}: third-party resource ${u}`); continue; }
@@ -69,6 +74,12 @@ for (const f of files) {
       const u = m[1]; if (/^(https?:|mailto:|tel:|#)/.test(u)) continue;
       if (missing(resolveLocal(f, u))) errors.push(`${rel(f)}: broken link ${u}`);
     }
+  }
+  // Markup built in scripts is checked too: a style attribute there is blocked when it reaches the page.
+  if (ext === '.js' && !vendor && /<[a-z][^>]*\sstyle\s*=\s*\\?["']/i.test(src)) errors.push(`${rel(f)}: markup with a style attribute (blocked by the CSP)`);
+  if (ext === '.svg') for (const m of src.matchAll(/<style>([\s\S]*?)<\/style>/g)) {
+    const h = `'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`;
+    if (!CSP.includes(h)) errors.push(`${rel(f)}: <style> is blocked by the CSP; add ${h} to style-src in deploy/Caddyfile`);
   }
   if (ext === '.css') for (const m of src.matchAll(/url\(\s*['"]?([^'")]+)/g)) {
     const u = m[1]; if (/^(data|blob):|^#/.test(u)) continue;
