@@ -17,12 +17,17 @@ documents change, there is no released product yet.
 - SPDX copyright and licence headers in every source file, `REUSE.toml` for the rest, `LICENSES/`, and a
   `reuse lint` check in the CI `build` job.
 - "Verifying a release" section in SECURITY.md.
+- The 404 page links to the bug report form, so a broken link can be reported (#15).
+- `.editorconfig` with the repository style: UTF-8, LF, final newline, 2-space indent (#13).
+- README: a Contributing section that points to CONTRIBUTING.md and good first issues (#16).
+- CONTRIBUTING.md: `npm run serve` to preview the site locally (#14).
 
 ### Changed
 - GOVERNANCE.md names two independent owners and maintainers, @wonmors (founder) and @xnosir (technical
   maintainer), and states openly that the founder's account runs delegated automation during setup.
 - README: contact options now include SECURITY.md and Telegram for vulnerabilities; the licence note no longer
   says the `LICENSE` file is still to come.
+- Development dependencies updated (npm group).
 
 ### Fixed
 - Removed an unused variable in the certificate scan code (found by ESLint).
