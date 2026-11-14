@@ -62,8 +62,7 @@ browser on each load, are non-extractable and are never sent anywhere.
 
 1. **Browser ↔ site.** Everything the browser receives is static and same-origin. The CSP
    (`default-src 'self'; script-src 'self'; ... frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'`)
-   means only our own script and style files apply; inline scripts, event handlers and inline styles are blocked
-   (`style-src 'self'` plus the sha256 hash of the favicon's own `<style>`). Inside the page, demo input is
+   means only our own script files run; inline scripts and event handlers are blocked. Inside the page, demo input is
    untrusted and only ever reaches the DOM through an escaping function or `textContent`.
 2. **Edge proxy ↔ site container.** The edge terminates TLS and adds `Strict-Transport-Security`; the container sets
    CSP, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy` and `Cross-Origin-Opener-Policy`.
@@ -83,7 +82,7 @@ browser on each load, are non-extractable and are never sent anywhere.
 | Principle | How it is applied |
 | --- | --- |
 | Economy of mechanism | No build step, no backend, no runtime dependencies, about 600 lines of first-party JavaScript. The demo logic is one DOM-free file that is unit tested on its own. |
-| Fail-safe defaults | CSP denies everything not explicitly same-origin. The demo verdict is checked in a fixed order (signature, then trust, then status) and starts from "not verified". A missing, malformed or unknown status entry counts as revoked. Malformed proofs, unknown keys and decoding errors all end as "Forged". |
+| Fail-safe defaults | CSP denies everything not explicitly same-origin, and no inline style is allowed except the favicon's `<style>`, pinned by its sha256 hash (`tools/check-site.mjs` fails on a `style` attribute in a page or in script-built markup, a `<style>` in a page, or an SVG `<style>` whose hash is not in the CSP). The demo verdict is checked in a fixed order (signature, then trust, then status) and starts from "not verified". A missing, malformed or unknown status entry counts as revoked. Malformed proofs, unknown keys and decoding errors all end as "Forged". |
 | Complete mediation | Every edit re-runs canonicalisation, hashing and signature verification from scratch; nothing is cached between runs except the keys. Every string that reaches `innerHTML` passes through `esc()`. |
 | Open design | All code is public. Security rests on standard algorithms (Ed25519, SHA-256 via WebCrypto) and the CSP, not on secrecy. |
 | Separation of privilege | Pull request checks run without secrets; deploying needs a merge to `main` (required `build` check, code owners) and the deploy secrets; the server accepts only the forced command. |

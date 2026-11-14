@@ -281,8 +281,8 @@ section.sec { padding: clamp(64px, 9vw, 140px) 0; position: relative; }
 @media (max-width: 860px) { .sec-head { grid-template-columns: 1fr; } }
 .band { background: var(--bg-2); }
 .src { font-size: 13.5px; color: var(--ink-3); margin-top: 18px; }
-.src a { color: var(--ink-2); }
 .src--meta { margin: 0 18px 16px; }
+.src a { color: var(--ink-2); }
 
 /* problem: real QR vs lookalike */
 .qrpath { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); }
@@ -305,8 +305,6 @@ section.sec { padding: clamp(64px, 9vw, 140px) 0; position: relative; }
 .chain svg.rail { position: absolute; left: 0; right: 0; top: 64px; width: 100%; height: 40px; pointer-events: none; overflow: visible; }
 .rail path { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 3 7; }
 .rail .run { stroke: var(--accent); stroke-dasharray: 0; stroke-width: 2; stroke-dashoffset: var(--len, 1000); }
-.rail .traveller { opacity: 0; }
-.rail .traveller rect { fill: var(--paper); }
 .node { position: relative; z-index: 1; }
 .node .ico { width: 128px; height: 128px; border-radius: 50%; display: grid; place-items: center; background: var(--panel); border: 1px solid var(--line); box-shadow: var(--shadow); margin-bottom: 22px; }
 .node .ico svg { width: 60px; height: 60px; color: var(--accent); }
@@ -351,11 +349,11 @@ section.sec { padding: clamp(64px, 9vw, 140px) 0; position: relative; }
 .steps li:last-child { border-bottom: 0; }
 .steps .st { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center; margin-top: 1px; transition: background .4s, border-color .4s; }
 .steps .st svg { width: 13px; height: 13px; opacity: 0; transition: opacity .3s; }
+.steps .st .i-x { position: absolute; }
 .steps li[data-s="ok"] .st { background: var(--good); border-color: var(--good); color: var(--bg); }
 .steps li[data-s="bad"] .st { background: var(--bad); border-color: var(--bad); color: var(--bg); }
 .steps li[data-s="skip"] .st { border-style: dashed; }
 .steps li[data-s="ok"] .st .i-ok, .steps li[data-s="bad"] .st .i-x { opacity: 1; }
-.steps .st .i-x { position: absolute; }
 .steps b { font-weight: 600; font-size: 15.5px; display: block; }
 .steps .d { font: 400 12.5px/1.5 var(--mono); color: var(--ink-3); overflow-wrap: anywhere; display: block; margin-top: 3px; }
 .verdict-big { margin: 6px 18px 18px; padding: 18px; border-radius: 12px; display: flex; gap: 14px; align-items: center; background: var(--bg); border: 1px solid var(--line-2); transition: background .5s, border-color .5s; }
@@ -373,7 +371,7 @@ section.sec { padding: clamp(64px, 9vw, 140px) 0; position: relative; }
 /* telegram mock */
 .tg { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: clamp(28px, 5vw, 90px); align-items: center; }
 .tg-copy h2 { font-size: clamp(36px, 4.6vw, 72px); margin-top: 14px; }
-.tg-copy .lead { margin-top: 20px; }
+.tg-copy h2 + .lead { margin-top: 20px; }
 .tg-copy ul { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 14px; }
 .tg-copy li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; color: var(--ink-2); }
 .tg-copy li svg { width: 22px; height: 22px; color: var(--accent); margin-top: 2px; }
@@ -488,3 +486,7 @@ html.no-js .rv { opacity: 1; transform: none; }
 .nf h1 { font-size: clamp(48px, 8vw, 110px); margin: 16px 0; }
 .nf p { color: var(--ink-2); max-width: 32em; margin: 0 auto 28px; }
 .nf .cta { justify-content: center; }
+
+/* The rail traveller starts hidden; main.js fades it in and out. */
+.traveller { opacity: 0; }
+.traveller__card { fill: var(--paper); }

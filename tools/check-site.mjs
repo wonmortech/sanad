@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 // Checks site/ before CI deploys it. No dependencies, no build: site/ is served as it is.
-// Fails on: missing required pages, broken local links, inline <script>, inline styles (the CSP blocks them),
+// Fails on: missing required pages, broken local links, inline <script>, style attributes and <style> (the CSP blocks them),
 // third-party origins in src/srcset/url() (the CSP blocks them), and text that must never be published.
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative, dirname, extname } from 'node:path';
@@ -20,7 +20,7 @@ const FORBIDDEN = [
   /\b(ghp|gho|github_pat)_[A-Za-z0-9_]{20,}/,
   /-----BEGIN [A-Z ]*PRIVATE KEY-----/,
 ];
-// style-src allows no inline style except the <style> inside SVG files (the favicon), pinned by its sha256 hash.
+// The CSP allows no inline style except the <style> inside the SVG files (the favicon), by its sha256 hash.
 const CSP = readFileSync(fileURLToPath(new URL('../deploy/Caddyfile', import.meta.url)), 'utf8').match(/Content-Security-Policy "([^"]+)"/)?.[1] ?? '';
 const TEXT = new Set(['.html', '.css', '.js', '.mjs', '.svg', '.txt', '.xml', '.json', '.webmanifest']);
 
