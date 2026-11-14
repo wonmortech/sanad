@@ -75,8 +75,10 @@ for (const f of files) {
       if (missing(resolveLocal(f, u))) errors.push(`${rel(f)}: broken link ${u}`);
     }
   }
-  // Markup built in scripts is checked too: a style attribute there is blocked when it reaches the page.
-  if (ext === '.js' && !vendor && /<[a-z][^>]*\sstyle\s*=\s*\\?["']/i.test(src)) errors.push(`${rel(f)}: markup with a style attribute (blocked by the CSP)`);
+  // Markup built in scripts: a style attribute in an HTML string, or one set with setAttribute, is blocked too.
+  if (ext === '.js' && !vendor && (/<[a-z][^>]*\sstyle\s*=\s*\\?["']/i.test(src) || /setAttribute\(\s*["']style["']/.test(src))) {
+    errors.push(`${rel(f)}: inline style in script markup (blocked by the CSP); use a class`);
+  }
   if (ext === '.svg') for (const m of src.matchAll(/<style>([\s\S]*?)<\/style>/g)) {
     const h = `'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`;
     if (!CSP.includes(h)) errors.push(`${rel(f)}: <style> is blocked by the CSP; add ${h} to style-src in deploy/Caddyfile`);
