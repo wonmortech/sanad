@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2026 Wonmor and Sanad contributors
+# SPDX-License-Identifier: Apache-2.0
+
+# Keep line endings LF in the repository on every OS (matches .editorconfig).
+* text=auto eol=lf
+
+# Binary assets: no diffs, no line-ending conversion.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.woff2 binary
+*.pdf binary
