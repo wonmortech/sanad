@@ -8,6 +8,10 @@ documents change, there is no released product yet.
 ## [Unreleased]
 
 ### Added
+- Concept demo (`demo/`, live at https://wonmor.io/demo/sanad/): the planned issuer console, offline verifier,
+  holder view and Telegram bot on 186 fictional credentials. Every credential is signed in the browser with a real
+  Ed25519 key and every check re-verifies it; did:web, the status list server, PDF/QR and the bot are simulated.
+  `npm run demo`, smoke test in CI (`npm run test:demo`), README screenshots from `npm run site:screenshots`.
 - Property-based tests with fast-check on random input, run in CI with the unit tests.
 - ESLint (`npm run lint`, warnings fail) over the site scripts, tests and tools, run in the CI `build` job.
 - Coverage of all site JavaScript: Chromium coverage from the browser tests is merged with the unit-test coverage

@@ -2,7 +2,7 @@
   "name": "sanad-site",
   "version": "0.0.0",
   "private": true,
-  "description": "Tests for the Sanad static site. The site itself has no build step and no runtime dependencies.",
+  "description": "Tests for the Sanad static site and its concept demo. Neither has runtime dependencies.",
   "license": "Apache-2.0",
   "engines": {
     "node": ">=24"
@@ -13,7 +13,11 @@
     "test:unit": "node tools/v8-coverage.mjs -- node --test --experimental-test-coverage --test-coverage-include=site/assets/js/sanad-core.js --test-coverage-lines=90 --test-coverage-branches=80 --test-coverage-functions=90 \"tests/unit/*.test.mjs\"",
     "test:e2e": "playwright test -c tests/e2e/playwright.config.mjs",
     "coverage": "c8 report --temp-directory .coverage/v8 --all --include \"site/**/*.js\" --reporter text --reporter html --reporter json-summary --report-dir coverage --check-coverage --statements 90 --lines 90 --functions 90 --branches 80",
-    "serve": "node tests/serve.mjs"
+    "serve": "node tests/serve.mjs",
+    "demo:build": "node tools/build-demo.mjs",
+    "demo": "node tools/build-demo.mjs && node tools/serve-demo.mjs",
+    "test:demo": "playwright test -c playwright.demo.config.mjs",
+    "site:screenshots": "node tools/site-screenshots.mjs"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

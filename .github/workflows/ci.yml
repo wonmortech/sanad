@@ -53,3 +53,7 @@ jobs:
       # combined coverage gate over every site/**/*.js file (unit + browser V8 coverage, merged by c8).
       - name: Test
         run: npm test
+
+      # The concept demo (demo/): every screen renders under the production CSP with no console errors.
+      - name: Demo smoke test
+        run: npm run test:demo

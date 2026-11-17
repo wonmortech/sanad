@@ -11,6 +11,7 @@ path = [
   "package.json",
   "package-lock.json",
   "site/*.png",
+  "docs/screenshots/*.jpg",
   "site/robots.txt",
   "site/sitemap.xml",
   "site/.well-known/security.txt",
