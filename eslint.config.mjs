@@ -16,7 +16,7 @@ const shared = {
 };
 
 export default [
-  { ignores: ['node_modules/', 'test-results/', 'playwright-report/', 'coverage/', '.coverage/', '.qa/'] },
+  { ignores: ['node_modules/', 'test-results/', 'playwright-report/', 'coverage/', '.coverage/', '.qa/', 'dist/'] },
   js.configs.recommended,
   {
     files: ['site/**/*.js'],
@@ -29,13 +29,19 @@ export default [
     rules: shared,
   },
   {
+    // The concept demo (demo/): browser ES modules; it reads the signing core from globalThis.SanadCore.
+    files: ['demo/**/*.js'],
+    languageOptions: { ecmaVersion: 'latest', sourceType: 'module', globals: { ...globals.browser } },
+    rules: shared,
+  },
+  {
     files: ['**/*.mjs'],
     languageOptions: { ecmaVersion: 2024, sourceType: 'module', globals: { ...globals.node } },
     rules: shared,
   },
   {
     // page.evaluate callbacks in the browser tests run in the page
-    files: ['tests/e2e/**/*.mjs'],
+    files: ['tests/e2e/**/*.mjs', 'tests/demo/**/*.mjs'],
     languageOptions: { globals: { ...globals.node, ...globals.browser } },
   },
 ];
